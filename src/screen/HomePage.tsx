@@ -6,7 +6,9 @@ export default function HomePage() {
       <Navbar />
       <div className="bg-black text-white scroll-smooth">
 
-        <section id="home" className="min-h-screen flex items-start justify-center pt-60">
+        {/* HomePage */}
+
+        <section id="home" className="min-h-screen flex items-start justify-center pt-60 via-[#0b0f19] to-black">
           <div className="w-[70%] grid md:grid-cols-2 gap-10 items-center">
 
             <div>
@@ -57,6 +59,9 @@ export default function HomePage() {
 
           </div>
         </section>
+
+        {/* about me */}
+
         <section
           id="about"
           className="min-h-screen flex items-center justify-center py-20 md:py-32 bg-gradient-to-b from-black via-[#0b0f19] to-black"
@@ -75,7 +80,7 @@ export default function HomePage() {
               <div className="w-24 h-1 bg-green-500 mx-auto rounded-full"></div>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-16 items-start">
+            <div className="grid md:grid-cols-2 gap-16 items-center">
 
               <div className="space-y-6">
 
@@ -185,7 +190,294 @@ export default function HomePage() {
           </div>
         </section>
 
+        {/* my projects */}
 
+        <section id="projects" className="min-h-screen flex items-center justify-center py-20 md:py-32 bg-gradient-to-b from-black via-[#0b0f19] to-black">
+          <div className="w-[70%] max-w-6xl">
+
+            <div className="text-center mb-16">
+              <span className="text-green-400 text-sm font-semibold tracking-widest uppercase">
+                My Work
+              </span>
+              <h2 className="text-4xl md:text-5xl font-bold mt-3 mb-4">
+                Featured Projects
+              </h2>
+              <div className="w-20 h-1 bg-green-500 mx-auto"></div>
+              <p className="text-gray-400 mt-6 max-w-2xl mx-auto">
+                Here are some of my recent projects that showcase my skills in web and mobile development
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+              <div className="group relative bg-gradient-to-br from-[#0f172a] to-[#1e293b] rounded-xl overflow-hidden border border-green-500/30 hover:border-green-500 transition-all duration-300 hover:shadow-2xl hover:shadow-green-500/20">
+
+                <div className="relative h-48 overflow-hidden bg-gray-800">
+                  <img
+                    src="https://images.unsplash.com/photo-1555421689-d68471e189f2?w=500"
+                    alt="E-commerce Project"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a] to-transparent opacity-60"></div>
+                </div>
+
+                <div className="p-6">
+                  <h3 className="text-xl font-bold mb-2 group-hover:text-green-400 transition">
+                    E-Commerce Platform
+                  </h3>
+                  <p className="text-gray-400 text-sm mb-4">
+                    A full-stack e-commerce solution with payment integration, admin dashboard, and real-time inventory management.
+                  </p>
+
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    <span className="px-2 py-1 bg-green-500/10 text-green-400 rounded text-xs">React</span>
+                    <span className="px-2 py-1 bg-green-500/10 text-green-400 rounded text-xs">Node.js</span>
+                    <span className="px-2 py-1 bg-green-500/10 text-green-400 rounded text-xs">PostgreSQL</span>
+                  </div>
+
+                  <div className="flex gap-3">
+                    <a href="#" className="flex items-center gap-2 text-sm text-gray-400 hover:text-green-400 transition">
+                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+                      </svg>
+                      GitHub
+                    </a>
+                    <a href="#" className="flex items-center gap-2 text-sm text-gray-400 hover:text-green-400 transition">
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                      </svg>
+                      Live Demo
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div className="group relative bg-gradient-to-br from-[#0f172a] to-[#1e293b] rounded-xl overflow-hidden border border-green-500/30 hover:border-green-500 transition-all duration-300 hover:shadow-2xl hover:shadow-green-500/20">
+
+                <div className="relative h-48 overflow-hidden bg-gray-800">
+                  <img
+                    src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=500"
+                    alt="Mobile App Project"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a] to-transparent opacity-60"></div>
+                </div>
+
+                <div className="p-6">
+                  <h3 className="text-xl font-bold mb-2 group-hover:text-green-400 transition">
+                    Fitness Tracker App
+                  </h3>
+                  <p className="text-gray-400 text-sm mb-4">
+                    Mobile app for tracking workouts, nutrition, and progress with social features and AI-powered recommendations.
+                  </p>
+
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    <span className="px-2 py-1 bg-green-500/10 text-green-400 rounded text-xs">React Native</span>
+                    <span className="px-2 py-1 bg-green-500/10 text-green-400 rounded text-xs">Expo</span>
+                    <span className="px-2 py-1 bg-green-500/10 text-green-400 rounded text-xs">Firebase</span>
+                  </div>
+
+                  <div className="flex gap-3">
+                    <a href="#" className="flex items-center gap-2 text-sm text-gray-400 hover:text-green-400 transition">
+                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+                      </svg>
+                      GitHub
+                    </a>
+                    <a href="#" className="flex items-center gap-2 text-sm text-gray-400 hover:text-green-400 transition">
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                      </svg>
+                      Live Demo
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div className="group relative bg-gradient-to-br from-[#0f172a] to-[#1e293b] rounded-xl overflow-hidden border border-green-500/30 hover:border-green-500 transition-all duration-300 hover:shadow-2xl hover:shadow-green-500/20">
+
+                <div className="relative h-48 overflow-hidden bg-gray-800">
+                  <img
+                    src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=500"
+                    alt="Dashboard Project"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a] to-transparent opacity-60"></div>
+                </div>
+
+                <div className="p-6">
+                  <h3 className="text-xl font-bold mb-2 group-hover:text-green-400 transition">
+                    Analytics Dashboard
+                  </h3>
+                  <p className="text-gray-400 text-sm mb-4">
+                    Real-time analytics platform with interactive charts, data visualization, and comprehensive reporting tools.
+                  </p>
+
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    <span className="px-2 py-1 bg-green-500/10 text-green-400 rounded text-xs">React</span>
+                    <span className="px-2 py-1 bg-green-500/10 text-green-400 rounded text-xs">TypeScript</span>
+                    <span className="px-2 py-1 bg-green-500/10 text-green-400 rounded text-xs">Node.js</span>
+                  </div>
+
+                  <div className="flex gap-3">
+                    <a href="#" className="flex items-center gap-2 text-sm text-gray-400 hover:text-green-400 transition">
+                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+                      </svg>
+                      GitHub
+                    </a>
+                    <a href="#" className="flex items-center gap-2 text-sm text-gray-400 hover:text-green-400 transition">
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                      </svg>
+                      Live Demo
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div className="group relative bg-gradient-to-br from-[#0f172a] to-[#1e293b] rounded-xl overflow-hidden border border-green-500/30 hover:border-green-500 transition-all duration-300 hover:shadow-2xl hover:shadow-green-500/20">
+
+                <div className="relative h-48 overflow-hidden bg-gray-800">
+                  <img
+                    src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=500"
+                    alt="Task Management"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a] to-transparent opacity-60"></div>
+                </div>
+
+                <div className="p-6">
+                  <h3 className="text-xl font-bold mb-2 group-hover:text-green-400 transition">
+                    Task Management System
+                  </h3>
+                  <p className="text-gray-400 text-sm mb-4">
+                    Collaborative project management tool with team features, kanban boards, and deadline tracking.
+                  </p>
+
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    <span className="px-2 py-1 bg-green-500/10 text-green-400 rounded text-xs">React</span>
+                    <span className="px-2 py-1 bg-green-500/10 text-green-400 rounded text-xs">Express</span>
+                    <span className="px-2 py-1 bg-green-500/10 text-green-400 rounded text-xs">MongoDB</span>
+                  </div>
+
+                  <div className="flex gap-3">
+                    <a href="#" className="flex items-center gap-2 text-sm text-gray-400 hover:text-green-400 transition">
+                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+                      </svg>
+                      GitHub
+                    </a>
+                    <a href="#" className="flex items-center gap-2 text-sm text-gray-400 hover:text-green-400 transition">
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                      </svg>
+                      Live Demo
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div className="group relative bg-gradient-to-br from-[#0f172a] to-[#1e293b] rounded-xl overflow-hidden border border-green-500/30 hover:border-green-500 transition-all duration-300 hover:shadow-2xl hover:shadow-green-500/20">
+
+                <div className="relative h-48 overflow-hidden bg-gray-800">
+                  <img
+                    src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=500"
+                    alt="Social Platform"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a] to-transparent opacity-60"></div>
+                </div>
+
+                <div className="p-6">
+                  <h3 className="text-xl font-bold mb-2 group-hover:text-green-400 transition">
+                    Social Media Platform
+                  </h3>
+                  <p className="text-gray-400 text-sm mb-4">
+                    Full-featured social network with real-time messaging, posts, stories, and user interactions.
+                  </p>
+
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    <span className="px-2 py-1 bg-green-500/10 text-green-400 rounded text-xs">React Native</span>
+                    <span className="px-2 py-1 bg-green-500/10 text-green-400 rounded text-xs">Node.js</span>
+                    <span className="px-2 py-1 bg-green-500/10 text-green-400 rounded text-xs">PostgreSQL</span>
+                  </div>
+
+                  <div className="flex gap-3">
+                    <a href="#" className="flex items-center gap-2 text-sm text-gray-400 hover:text-green-400 transition">
+                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+                      </svg>
+                      GitHub
+                    </a>
+                    <a href="#" className="flex items-center gap-2 text-sm text-gray-400 hover:text-green-400 transition">
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                      </svg>
+                      Live Demo
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div className="group relative bg-gradient-to-br from-[#0f172a] to-[#1e293b] rounded-xl overflow-hidden border border-green-500/30 hover:border-green-500 transition-all duration-300 hover:shadow-2xl hover:shadow-green-500/20">
+
+                <div className="relative h-48 overflow-hidden bg-gray-800">
+                  <img
+                    src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=500"
+                    alt="Portfolio"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a] to-transparent opacity-60"></div>
+                </div>
+
+                <div className="p-6">
+                  <h3 className="text-xl font-bold mb-2 group-hover:text-green-400 transition">
+                    Weather Forecast App
+                  </h3>
+                  <p className="text-gray-400 text-sm mb-4">
+                    Beautiful weather application with location-based forecasts, animated backgrounds, and weather alerts.
+                  </p>
+
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    <span className="px-2 py-1 bg-green-500/10 text-green-400 rounded text-xs">React</span>
+                    <span className="px-2 py-1 bg-green-500/10 text-green-400 rounded text-xs">TypeScript</span>
+                    <span className="px-2 py-1 bg-green-500/10 text-green-400 rounded text-xs">API</span>
+                  </div>
+
+                  <div className="flex gap-3">
+                    <a href="#" className="flex items-center gap-2 text-sm text-gray-400 hover:text-green-400 transition">
+                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+                      </svg>
+                      GitHub
+                    </a>
+                    <a href="#" className="flex items-center gap-2 text-sm text-gray-400 hover:text-green-400 transition">
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                      </svg>
+                      Live Demo
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div className="text-center mt-12">
+              <button className="bg-green-500 hover:bg-green-600 transition px-8 py-3 rounded-full font-semibold text-black inline-flex items-center gap-2">
+                View All Projects
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </button>
+            </div>
+
+          </div>
+        </section>
+
+
+        
       </div>
     </div>
   );
