@@ -26,13 +26,11 @@ export default function HomePage() {
               </h1>
 
               <p className="text-green-400 font-semibold mb-6 text-lg">
-                I AM Web Developer
+                I am a Web & Mobile Developer
               </p>
 
               <p className="text-gray-400 max-w-md mb-8 leading-relaxed">
-                From Dhaka, Bangladesh. I'm a Full Stack Web developer who is passionate about
-                making error-free websites. I am also good at WordPress. I love to talk with you
-                about your unique idea.
+                Based in Morocco, I build scalable web applications and high-performance mobile apps using modern technologies, focusing on clean architecture, performance, and user-centered design. I’m passionate about solving real-world problems and transforming ideas into reliable digital products. Let’s build something great together.
               </p>
 
               <button className="bg-green-500 hover:bg-green-600 transition px-8 py-3 rounded-full font-semibold text-black">
