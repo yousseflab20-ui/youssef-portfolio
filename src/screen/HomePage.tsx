@@ -1,5 +1,7 @@
 import "./index.css";
 import Navbar from "../components/Navbar";
+import profileImg from "../assets/images/my-photo-removebg-preview.png";
+
 export default function HomePage() {
   return (
     <div className="bg-black text-white">
@@ -8,11 +10,14 @@ export default function HomePage() {
 
         {/* HomePage */}
 
-        <section id="home" className="min-h-screen flex items-start justify-center pt-60 via-[#0b0f19] to-black bg-gradient-to-b from-black via-[#0b0f19] to-black">
-          <div className="w-[70%] grid md:grid-cols-2 gap-10 items-center">
+        <section
+          id="home"
+          className="h-[80vh] flex items-center justify-center bg-black relative overflow-hidden"
+        >
+          <div className="w-[70%] grid md:grid-cols-2 gap-16 items-center">
 
             <div>
-              <p className="text-sm text-gray-400 mb-2 tracking-widest">
+              <p className="text-sm text-gray-400 mb-2 tracking-widest uppercase">
                 HELLO, I AM
               </p>
 
@@ -20,40 +25,43 @@ export default function HomePage() {
                 YOUSSEF LABNINE
               </h1>
 
-              <p className="text-green-400 font-semibold mb-3">
-                I AM Full Stack Mobile & Web Developer
+              <p className="text-green-400 font-semibold mb-6 text-lg">
+                I AM Web Developer
               </p>
 
-              <p className="text-gray-400 max-w-md mb-6">
-                I'm a Full Stack Mobile & Web Developer specialized in building
-                scalable web applications and high-performance mobile apps.
-                I transform ideas into modern, efficient, and user-focused digital solutions.
+              <p className="text-gray-400 max-w-md mb-8 leading-relaxed">
+                From Dhaka, Bangladesh. I'm a Full Stack Web developer who is passionate about
+                making error-free websites. I am also good at WordPress. I love to talk with you
+                about your unique idea.
               </p>
 
-              <button className="bg-green-500 hover:bg-green-600 transition px-6 py-3 rounded-full font-semibold text-black">
+              <button className="bg-green-500 hover:bg-green-600 transition px-8 py-3 rounded-full font-semibold text-black">
                 Contact
               </button>
             </div>
 
-            <div className="relative flex justify-center">
-              <div className="absolute w-80 h-80 bg-green-500 rounded-full -z-10 blur-2xl opacity-70"></div>
+            <div className="relative flex justify-center items-center">
+
+              <div className="absolute w-[450px] h-[450px] bg-green-500 rounded-full -z-10"></div>
 
               <img
-                src="https://images.unsplash.com/photo-1603415526960-f7e0328c63b1"
+                src={profileImg}
                 alt="profile"
-                className="w-72 md:w-80 object-cover rounded-xl"
+                className="w-[1000px] h-[650px] object-cover relative z-10"
               />
 
-              <div className="absolute -bottom-16 flex gap-6">
-                <div className="bg-[#0f172a] border border-green-500 rounded-xl px-6 py-4 text-center">
-                  <h3 className="text-xl font-bold">1+</h3>
-                  <p className="text-sm text-gray-400">Years of Experience</p>
+              <div className="absolute -bottom-10 left-1/2 transform -translate-x-1/2 flex gap-6 z-20">
+
+                <div className="bg-[#0a0f1a] border-2 border-green-500 rounded-2xl px-8 py-5 text-center min-w-[160px]">
+                  <h3 className="text-3xl font-bold text-white mb-1">6+</h3>
+                  <p className="text-sm text-green-400">Years of Experience</p>
                 </div>
 
-                <div className="bg-[#0f172a] border border-green-500 rounded-xl px-6 py-4 text-center">
-                  <h3 className="text-xl font-bold">100+</h3>
-                  <p className="text-sm text-gray-400">Completed Projects</p>
+                <div className="bg-[#0a0f1a] border-2 border-green-500 rounded-2xl px-8 py-5 text-center min-w-[160px]">
+                  <h3 className="text-3xl font-bold text-white mb-1">100+</h3>
+                  <p className="text-sm text-green-400">Completed Projects</p>
                 </div>
+
               </div>
             </div>
 
