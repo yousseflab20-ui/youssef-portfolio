@@ -229,16 +229,25 @@ export default function HomePage() {
 
                 <div className="p-6">
                   <h3 className="text-xl font-bold mb-2 group-hover:text-green-400 transition">
-                    E-Commerce Platform
+                    CarMarket Mobile App
                   </h3>
                   <p className="text-gray-400 text-sm mb-4">
-                    A full-stack e-commerce solution with payment integration, admin dashboard, and real-time inventory management.
+                    A full-stack car marketplace mobile application built with Expo & TypeScript.
+                    The app allows users to list, browse, and chat in real-time about vehicles.
+                    I developed both frontend and backend including authentication, image uploads, push notifications, and CI/CD workflows.
                   </p>
 
                   <div className="flex flex-wrap gap-2 mb-4">
-                    <span className="px-2 py-1 bg-green-500/10 text-green-400 rounded text-xs">React</span>
+                    <span className="px-2 py-1 bg-green-500/10 text-green-400 rounded text-xs">Expo</span>
+                    <span className="px-2 py-1 bg-green-500/10 text-green-400 rounded text-xs">TypeScript</span>
                     <span className="px-2 py-1 bg-green-500/10 text-green-400 rounded text-xs">Node.js</span>
-                    <span className="px-2 py-1 bg-green-500/10 text-green-400 rounded text-xs">PostgreSQL</span>
+                    <span className="px-2 py-1 bg-green-500/10 text-green-400 rounded text-xs">Sequelize ORM</span>
+                    <span className="px-2 py-1 bg-green-500/10 text-green-400 rounded text-xs">Zod</span>
+                    <span className="px-2 py-1 bg-green-500/10 text-green-400 rounded text-xs">Zustand</span>
+                    <span className="px-2 py-1 bg-green-500/10 text-green-400 rounded text-xs">Firebase</span>
+                    <span className="px-2 py-1 bg-green-500/10 text-green-400 rounded text-xs">Socket.io</span>
+                    <span className="px-2 py-1 bg-green-500/10 text-green-400 rounded text-xs">Cloudinary</span>
+                    <span className="px-2 py-1 bg-green-500/10 text-green-400 rounded text-xs">GitHub Actions</span>
                   </div>
 
                   <div className="flex gap-3">
@@ -271,17 +280,25 @@ export default function HomePage() {
 
                 <div className="p-6">
                   <h3 className="text-xl font-bold mb-2 group-hover:text-green-400 transition">
-                    Fitness Tracker App
+                    La Grande Soirée Gnawa Mobile App
                   </h3>
                   <p className="text-gray-400 text-sm mb-4">
-                    Mobile app for tracking workouts, nutrition, and progress with social features and AI-powered recommendations.
+                    A full-stack event management mobile application developed for La Grande Soirée Gnawa.
+                    I built both backend and frontend including authentication, event management, user registration, and secure data handling.
+                    The project focuses on performance, scalability, and clean architecture.
                   </p>
 
+
                   <div className="flex flex-wrap gap-2 mb-4">
-                    <span className="px-2 py-1 bg-green-500/10 text-green-400 rounded text-xs">React Native</span>
-                    <span className="px-2 py-1 bg-green-500/10 text-green-400 rounded text-xs">Expo</span>
-                    <span className="px-2 py-1 bg-green-500/10 text-green-400 rounded text-xs">Firebase</span>
+                    <span className="px-2 py-1 bg-green-500/10 text-green-400 rounded text-xs">React Native CLI</span>
+                    <span className="px-2 py-1 bg-green-500/10 text-green-400 rounded text-xs">TypeScript</span>
+                    <span className="px-2 py-1 bg-green-500/10 text-green-400 rounded text-xs">Node.js</span>
+                    <span className="px-2 py-1 bg-green-500/10 text-green-400 rounded text-xs">JavaScript</span>
+                    <span className="px-2 py-1 bg-green-500/10 text-green-400 rounded text-xs">ORM</span>
+                    <span className="px-2 py-1 bg-green-500/10 text-green-400 rounded text-xs">Zustand</span>
+                    <span className="px-2 py-1 bg-green-500/10 text-green-400 rounded text-xs">AsyncStorage</span>
                   </div>
+
 
                   <div className="flex gap-3">
                     <a href="#" className="flex items-center gap-2 text-sm text-gray-400 hover:text-green-400 transition">
@@ -313,17 +330,25 @@ export default function HomePage() {
 
                 <div className="p-6">
                   <h3 className="text-xl font-bold mb-2 group-hover:text-green-400 transition">
-                    Analytics Dashboard
+                    Agadir Task Manager 2025
                   </h3>
                   <p className="text-gray-400 text-sm mb-4">
-                    Real-time analytics platform with interactive charts, data visualization, and comprehensive reporting tools.
+                    A full-stack task management mobile application developed for Agadir Task Manager 2025.
+                    I built both frontend and backend including authentication, task creation, real-time updates, and secure data handling.
+                    The project focuses on performance, scalability, and clean architecture.
                   </p>
 
+
                   <div className="flex flex-wrap gap-2 mb-4">
-                    <span className="px-2 py-1 bg-green-500/10 text-green-400 rounded text-xs">React</span>
+                    <span className="px-2 py-1 bg-green-500/10 text-green-400 rounded text-xs">React Native CLI</span>
                     <span className="px-2 py-1 bg-green-500/10 text-green-400 rounded text-xs">TypeScript</span>
                     <span className="px-2 py-1 bg-green-500/10 text-green-400 rounded text-xs">Node.js</span>
+                    <span className="px-2 py-1 bg-green-500/10 text-green-400 rounded text-xs">JavaScript</span>
+                    <span className="px-2 py-1 bg-green-500/10 text-green-400 rounded text-xs">Sequelize ORM</span>
+                    <span className="px-2 py-1 bg-green-500/10 text-green-400 rounded text-xs">Zustand</span>
+                    <span className="px-2 py-1 bg-green-500/10 text-green-400 rounded text-xs">AsyncStorage</span>
                   </div>
+
 
                   <div className="flex gap-3">
                     <a href="#" className="flex items-center gap-2 text-sm text-gray-400 hover:text-green-400 transition">
@@ -355,17 +380,25 @@ export default function HomePage() {
 
                 <div className="p-6">
                   <h3 className="text-xl font-bold mb-2 group-hover:text-green-400 transition">
-                    Task Management System
+                    Simulateur de Taxi Casablancais
                   </h3>
                   <p className="text-gray-400 text-sm mb-4">
-                    Collaborative project management tool with team features, kanban boards, and deadline tracking.
+                    A taxi booking simulation mobile application built with Expo.
+                    The app calculates the distance between the user and the taxi,
+                    displays real-time taxi location tracking on the map,
+                    and provides estimated arrival updates.
+                    I focused on building the complete frontend and map integration.
                   </p>
 
+
                   <div className="flex flex-wrap gap-2 mb-4">
-                    <span className="px-2 py-1 bg-green-500/10 text-green-400 rounded text-xs">React</span>
-                    <span className="px-2 py-1 bg-green-500/10 text-green-400 rounded text-xs">Express</span>
-                    <span className="px-2 py-1 bg-green-500/10 text-green-400 rounded text-xs">MongoDB</span>
+                    <span className="px-2 py-1 bg-green-500/10 text-green-400 rounded text-xs">React Native</span>
+                    <span className="px-2 py-1 bg-green-500/10 text-green-400 rounded text-xs">Expo</span>
+                    <span className="px-2 py-1 bg-green-500/10 text-green-400 rounded text-xs">Maps Integration</span>
+                    <span className="px-2 py-1 bg-green-500/10 text-green-400 rounded text-xs">Geolocation</span>
+                    <span className="px-2 py-1 bg-green-500/10 text-green-400 rounded text-xs">Distance Calculation</span>
                   </div>
+
 
                   <div className="flex gap-3">
                     <a href="#" className="flex items-center gap-2 text-sm text-gray-400 hover:text-green-400 transition">
