@@ -1,6 +1,6 @@
 import "./index.css";
 import Navbar from "../components/Navbar";
-import profileImg from "../assets/images/my-photo-removebg-preview.png";
+import profileImg from "../assets/images/image-test.png";
 import { PERSONAL_INFO, STATS, SOCIAL_LINKS, PROJECTS, TECH_STACK } from "../constants";
 
 export default function HomePage() {
