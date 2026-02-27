@@ -8,292 +8,355 @@ import { PERSONAL_INFO, STATS, SOCIAL_LINKS, PROJECTS, TECH_STACK } from "../con
 
 gsap.registerPlugin(ScrollTrigger);
 
+const IconMail = () => (
+  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8}
+      d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+  </svg>
+);
+const IconPhone = () => (
+  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8}
+      d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+  </svg>
+);
+const IconPin = () => (
+  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8}
+      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+  </svg>
+);
+const IconArrow = () => (
+  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+  </svg>
+);
+const IconGithub = () => (
+  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+  </svg>
+);
+const IconExternal = () => (
+  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+  </svg>
+);
+const IconSend = () => (
+  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+  </svg>
+);
+
 export default function HomePage() {
-  // Refs for sections
-  const heroRef = useRef<HTMLDivElement>(null);
-  const heroTextRef = useRef<HTMLDivElement>(null);
-  const heroImgRef = useRef<HTMLDivElement>(null);
-  const statsRef = useRef<HTMLDivElement>(null);
-
+  const heroRef = useRef<HTMLElement>(null);
   const aboutRef = useRef<HTMLElement>(null);
-  const aboutTextRef = useRef<HTMLDivElement>(null);
-  const aboutStatsRef = useRef<HTMLDivElement>(null);
-  const techRef = useRef<HTMLDivElement>(null);
-
-  const projectsRef = useRef<HTMLElement>(null);
-  const projectsHeadRef = useRef<HTMLDivElement>(null);
-  const projectsGridRef = useRef<HTMLDivElement>(null);
-
+  const projRef = useRef<HTMLElement>(null);
   const contactRef = useRef<HTMLElement>(null);
-  const contactLeftRef = useRef<HTMLDivElement>(null);
-  const contactRightRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
 
-      // ─── HERO ──────────────────────────────────────────────────────────
-      const heroTl = gsap.timeline({ defaults: { ease: "power3.out" } });
-      heroTl
-        .fromTo(".hero-badge", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6 }, 0.4)
-        .fromTo(".hero-name", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.7 }, 0.6)
-        .fromTo(".hero-title", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6 }, 0.8)
-        .fromTo(".hero-bio", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6 }, 1.0)
-        .fromTo(".hero-cta", { opacity: 0, y: 20, scale: 0.95 }, { opacity: 1, y: 0, scale: 1, duration: 0.5 }, 1.2)
-        .fromTo(heroImgRef.current, { opacity: 0, scale: 0.85, x: 60 }, { opacity: 1, scale: 1, x: 0, duration: 0.9 }, 0.5)
-        .fromTo(".hero-stat", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, stagger: 0.15 }, 1.2);
+      gsap.timeline({ defaults: { ease: "power3.out" } })
+        .from(".h-badge", { opacity: 0, y: 16, duration: 0.55 }, 0.3)
+        .from(".h-title", { opacity: 0, y: 32, duration: 0.65 }, 0.45)
+        .from(".h-role", { opacity: 0, y: 20, duration: 0.55 }, 0.6)
+        .from(".h-bio", { opacity: 0, y: 16, duration: 0.5 }, 0.72)
+        .from(".h-actions", { opacity: 0, y: 16, duration: 0.5 }, 0.85)
+        .from(".h-stats", { opacity: 0, y: 20, duration: 0.5 }, 0.95)
+        .from(".h-img", { opacity: 0, x: 48, duration: 0.75 }, 0.4);
 
-      // ─── ABOUT ─────────────────────────────────────────────────────────
-      gsap.fromTo(aboutTextRef.current,
-        { opacity: 0, x: -60 },
-        {
-          opacity: 1, x: 0, duration: 0.8, ease: "power3.out",
-          scrollTrigger: { trigger: aboutRef.current, start: "top 75%" }
-        }
-      );
-      gsap.fromTo(".about-heading",
-        { opacity: 0, y: 30 },
-        {
-          opacity: 1, y: 0, duration: 0.7, ease: "power3.out",
-          scrollTrigger: { trigger: aboutRef.current, start: "top 80%" }
-        }
-      );
-      gsap.fromTo(".about-stat",
-        { opacity: 0, scale: 0.8 },
-        {
-          opacity: 1, scale: 1, duration: 0.5, stagger: 0.15, ease: "back.out(1.5)",
-          scrollTrigger: { trigger: aboutStatsRef.current, start: "top 85%" }
-        }
-      );
-      gsap.fromTo(".tech-card",
-        { opacity: 0, y: 30 },
-        {
-          opacity: 1, y: 0, duration: 0.5, stagger: 0.05, ease: "power2.out",
-          scrollTrigger: { trigger: techRef.current, start: "top 80%" }
-        }
-      );
+      const aStart = "top 78%";
+      gsap.from(".ab-heading", {
+        opacity: 0, y: 28, duration: 0.65, ease: "power3.out",
+        scrollTrigger: { trigger: aboutRef.current, start: aStart },
+      });
+      gsap.from(".ab-text > *", {
+        opacity: 0, y: 24, duration: 0.55, stagger: 0.12, ease: "power3.out",
+        scrollTrigger: { trigger: ".ab-text", start: aStart },
+      });
+      gsap.from(".ab-stat", {
+        opacity: 0, scale: 0.85, duration: 0.45, stagger: 0.1, ease: "back.out(1.4)",
+        scrollTrigger: { trigger: ".ab-stats", start: aStart },
+      });
+      gsap.from(".tech-icon", {
+        opacity: 0, y: 20, duration: 0.4, stagger: 0.04, ease: "power2.out",
+        scrollTrigger: { trigger: ".tech-grid", start: "top 82%" },
+      });
 
-      // ─── PROJECTS ──────────────────────────────────────────────────────
-      gsap.fromTo(projectsHeadRef.current,
-        { opacity: 0, y: 30 },
-        {
-          opacity: 1, y: 0, duration: 0.7, ease: "power3.out",
-          scrollTrigger: { trigger: projectsRef.current, start: "top 80%" }
-        }
-      );
-      gsap.fromTo(".project-card",
-        { opacity: 0, y: 50 },
-        {
-          opacity: 1, y: 0, duration: 0.6, stagger: 0.15, ease: "power3.out",
-          scrollTrigger: { trigger: projectsGridRef.current, start: "top 80%" }
-        }
-      );
+      gsap.from(".pr-heading", {
+        opacity: 0, y: 28, duration: 0.65, ease: "power3.out",
+        scrollTrigger: { trigger: projRef.current, start: "top 80%" },
+      });
+      gsap.from(".pr-card", {
+        opacity: 0, y: 40, duration: 0.55, stagger: 0.15, ease: "power3.out",
+        scrollTrigger: { trigger: ".pr-grid", start: "top 80%" },
+      });
 
-      // ─── CONTACT ───────────────────────────────────────────────────────
-      gsap.fromTo(contactLeftRef.current,
-        { opacity: 0, x: -50 },
-        {
-          opacity: 1, x: 0, duration: 0.8, ease: "power3.out",
-          scrollTrigger: { trigger: contactRef.current, start: "top 75%" }
-        }
-      );
-      gsap.fromTo(contactRightRef.current,
-        { opacity: 0, x: 50 },
-        {
-          opacity: 1, x: 0, duration: 0.8, ease: "power3.out",
-          scrollTrigger: { trigger: contactRef.current, start: "top 75%" }
-        }
-      );
+      gsap.from(".ct-left", {
+        opacity: 0, x: -40, duration: 0.7, ease: "power3.out",
+        scrollTrigger: { trigger: contactRef.current, start: "top 78%" },
+      });
+      gsap.from(".ct-right", {
+        opacity: 0, x: 40, duration: 0.7, ease: "power3.out",
+        scrollTrigger: { trigger: contactRef.current, start: "top 78%" },
+      });
 
     });
-
     return () => ctx.revert();
   }, []);
 
+  const inputStyle: React.CSSProperties = {
+    width: "100%",
+    background: "var(--bg)",
+    border: "1.5px solid var(--border)",
+    borderRadius: 8,
+    padding: "11px 14px",
+    fontSize: "0.875rem",
+    color: "var(--text)",
+    outline: "none",
+    fontFamily: "inherit",
+    transition: "border-color 0.2s",
+  };
+
   return (
-    <div style={{ background: "var(--bg)", color: "var(--text-primary)" }}>
+    <div style={{ background: "var(--bg)", color: "var(--text)" }}>
       <Navbar />
 
-      {/* ═══════════════════════ HERO ═══════════════════════ */}
       <section
         ref={heroRef}
         id="home"
-        className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20"
-        style={{ background: "linear-gradient(135deg, #f8fafc 0%, #eef2ff 50%, #f8fafc 100%)" }}
+        style={{
+          paddingTop: 120,
+          paddingBottom: 100,
+          background: "linear-gradient(160deg, #f5f3ff 0%, #f9fafb 60%)",
+          borderBottom: "1px solid var(--border)",
+        }}
       >
-        {/* Decorative blobs */}
-        <div className="absolute top-20 right-10 w-96 h-96 rounded-full opacity-20 blur-3xl pointer-events-none"
-          style={{ background: "radial-gradient(circle, #818cf8, transparent)" }} />
-        <div className="absolute bottom-20 left-10 w-72 h-72 rounded-full opacity-15 blur-3xl pointer-events-none"
-          style={{ background: "radial-gradient(circle, #a78bfa, transparent)" }} />
+        <div className="container" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 72, alignItems: "center" }}>
 
-        <div className="w-[85%] max-w-6xl grid md:grid-cols-2 gap-16 items-center z-10">
-
-          {/* Left: Text */}
-          <div ref={heroTextRef}>
-            <p className="hero-badge accent-badge mb-6">
-              👋 Hello, I am
-            </p>
+          <div>
+            <span className="h-badge eyebrow">👋 Hello, I am</span>
 
             <h1
-              className="hero-name font-black mb-4 leading-tight"
-              style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)", color: "var(--text-primary)" }}
+              className="h-title"
+              style={{
+                fontSize: "clamp(2.2rem, 4.5vw, 3.5rem)",
+                fontWeight: 900,
+                lineHeight: 1.15,
+                letterSpacing: "-0.02em",
+                marginBottom: 16,
+                color: "var(--text)",
+              }}
             >
               {PERSONAL_INFO.name.split(" ")[0]}{" "}
-              <span className="gradient-text">{PERSONAL_INFO.name.split(" ")[1]}</span>
+              <span style={{ color: "var(--accent)" }}>{PERSONAL_INFO.name.split(" ")[1]}</span>
             </h1>
 
-            <p className="hero-title font-semibold mb-5 text-xl" style={{ color: "var(--accent)" }}>
+            <p
+              className="h-role"
+              style={{
+                fontSize: "1.1rem",
+                fontWeight: 600,
+                color: "var(--accent-2)",
+                marginBottom: 20,
+              }}
+            >
               {PERSONAL_INFO.title}
             </p>
 
-            <p className="hero-bio text-base leading-relaxed mb-8 max-w-lg" style={{ color: "var(--text-secondary)" }}>
+            <p
+              className="h-bio"
+              style={{
+                fontSize: "0.95rem",
+                color: "var(--text-sub)",
+                lineHeight: 1.75,
+                maxWidth: 480,
+                marginBottom: 32,
+              }}
+            >
               {PERSONAL_INFO.bio}
             </p>
 
-            <div className="hero-cta flex items-center gap-4 flex-wrap">
-              <a href="#contact" className="btn-primary">
-                Let's Work Together
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
+            <div className="h-actions" style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
+              <a href="#contact" className="btn">
+                Hire Me <IconArrow />
               </a>
-              <a
-                href={SOCIAL_LINKS.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 font-semibold text-sm transition-colors"
-                style={{ color: "var(--text-secondary)" }}
-              >
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
-                </svg>
-                View GitHub
+              <a href={SOCIAL_LINKS.github} target="_blank" rel="noopener noreferrer" className="btn-ghost">
+                <IconGithub /> GitHub
               </a>
             </div>
 
-            {/* Stats under text */}
-            <div ref={statsRef} className="flex gap-6 mt-12 flex-wrap">
-              <div className="hero-stat stat-card">
-                <h3 className="text-3xl font-black gradient-text">{STATS.yearsExperience}</h3>
-                <p className="text-xs font-medium mt-1" style={{ color: "var(--text-muted)" }}>Years Experience</p>
-              </div>
-              <div className="hero-stat stat-card">
-                <h3 className="text-3xl font-black gradient-text">{STATS.projectsCompleted}</h3>
-                <p className="text-xs font-medium mt-1" style={{ color: "var(--text-muted)" }}>Projects Done</p>
-              </div>
-              <div className="hero-stat stat-card">
-                <h3 className="text-3xl font-black gradient-text">{STATS.technologies}</h3>
-                <p className="text-xs font-medium mt-1" style={{ color: "var(--text-muted)" }}>Technologies</p>
-              </div>
+            <div
+              className="h-stats"
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(3, 1fr)",
+                gap: 1,
+                marginTop: 48,
+                background: "var(--border)",
+                borderRadius: 12,
+                overflow: "hidden",
+                border: "1px solid var(--border)",
+              }}
+            >
+              {[
+                { v: STATS.yearsExperience, l: "Years Experience" },
+                { v: STATS.projectsCompleted, l: "Projects Done" },
+                { v: STATS.technologies, l: "Technologies" },
+              ].map((s, i) => (
+                <div
+                  key={i}
+                  style={{
+                    background: "var(--surface)",
+                    padding: "20px 16px",
+                    textAlign: "center",
+                  }}
+                >
+                  <p style={{ fontSize: "1.75rem", fontWeight: 800, color: "var(--accent)", lineHeight: 1 }}>{s.v}</p>
+                  <p style={{ fontSize: "0.72rem", color: "var(--text-muted)", marginTop: 6, fontWeight: 500 }}>{s.l}</p>
+                </div>
+              ))}
             </div>
           </div>
 
-          {/* Right: Image */}
-          <div ref={heroImgRef} className="relative flex justify-center items-center">
-            {/* Decorative ring */}
+          <div
+            className="h-img"
+            style={{ position: "relative", display: "flex", justifyContent: "center", alignItems: "center" }}
+          >
             <div
-              className="absolute w-[380px] h-[380px] rounded-full border-2 opacity-30"
-              style={{ borderColor: "var(--accent)" }}
-            />
-            <div
-              className="absolute w-[340px] h-[340px] rounded-full"
-              style={{ background: "linear-gradient(135deg, #eef2ff, #c7d2fe)", opacity: 0.6 }}
+              style={{
+                position: "absolute",
+                inset: 0,
+                background: "linear-gradient(135deg, #ede9fe 0%, #ddd6fe 100%)",
+                borderRadius: 24,
+                zIndex: 0,
+              }}
             />
             <img
               src={profileImg}
               alt="Youssef Labnine"
-              className="relative z-10 w-[420px] h-[550px] object-cover rounded-3xl"
-              style={{ boxShadow: "0 20px 60px rgba(99,102,241,0.25)" }}
+              style={{
+                position: "relative",
+                zIndex: 1,
+                width: "100%",
+                maxWidth: 420,
+                height: 520,
+                objectFit: "cover",
+                borderRadius: 20,
+                boxShadow: "0 20px 50px rgba(79,70,229,0.18)",
+              }}
             />
-            {/* Floating badge */}
             <div
-              className="absolute bottom-6 -left-4 z-20 glass-card px-5 py-3 flex items-center gap-3"
-              style={{ borderRadius: "14px" }}
+              style={{
+                position: "absolute",
+                bottom: 24,
+                left: -16,
+                zIndex: 2,
+                background: "var(--surface)",
+                border: "1px solid var(--border)",
+                borderRadius: 10,
+                padding: "10px 18px",
+                display: "flex",
+                alignItems: "center",
+                gap: 10,
+                boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
+              }}
             >
-              <div className="w-3 h-3 rounded-full bg-green-400 animate-pulse" />
-              <span className="text-sm font-semibold" style={{ color: "var(--text-primary)" }}>
-                Available for work
-              </span>
+              <span style={{ width: 10, height: 10, borderRadius: "50%", background: "#22c55e", display: "inline-block", flexShrink: 0, boxShadow: "0 0 0 3px #dcfce7" }} />
+              <span style={{ fontSize: "0.8rem", fontWeight: 600, color: "var(--text)" }}>Available for work</span>
             </div>
           </div>
 
         </div>
       </section>
 
-      {/* ═══════════════════════ ABOUT ═══════════════════════ */}
       <section
         ref={aboutRef}
         id="about"
-        className="py-28"
-        style={{ background: "var(--bg-secondary)" }}
+        style={{ padding: "100px 0", background: "var(--surface)", borderBottom: "1px solid var(--border)" }}
       >
-        <div className="w-[85%] max-w-6xl mx-auto">
+        <div className="container">
 
-          {/* Heading */}
-          <div className="about-heading text-center mb-20">
-            <span className="accent-badge mb-4 inline-block">Get to know me</span>
-            <h2 className="text-4xl md:text-5xl font-black mt-3 mb-4" style={{ color: "var(--text-primary)" }}>
-              About <span className="gradient-text">Me</span>
+          <div className="ab-heading" style={{ textAlign: "center", marginBottom: 64 }}>
+            <span className="eyebrow">About Me</span>
+            <h2 style={{ fontSize: "clamp(1.8rem, 3vw, 2.5rem)", fontWeight: 800, letterSpacing: "-0.02em" }}>
+              Who I Am
             </h2>
-            <div className="section-line mt-4" />
+            <div className="divider" />
           </div>
 
-          <div className="grid md:grid-cols-2 gap-16 items-start">
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 64, alignItems: "start" }}>
 
-            {/* Left: Text */}
-            <div ref={aboutTextRef} className="space-y-6">
-              <p className="text-lg leading-relaxed" style={{ color: "var(--text-secondary)" }}>
+            <div className="ab-text" style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+              <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--text-sub)", fontWeight: 500 }}>
                 {PERSONAL_INFO.about.intro}
               </p>
-              <p className="leading-relaxed" style={{ color: "var(--text-muted)" }}>
+              <p style={{ lineHeight: 1.8, color: "var(--text-muted)", fontSize: "0.925rem" }}>
                 {PERSONAL_INFO.about.specialization}
               </p>
-              <p className="leading-relaxed" style={{ color: "var(--text-muted)" }}>
+              <p style={{ lineHeight: 1.8, color: "var(--text-muted)", fontSize: "0.925rem" }}>
                 {PERSONAL_INFO.about.goal}
               </p>
 
-              {/* Stats */}
-              <div ref={aboutStatsRef} className="grid grid-cols-3 gap-4 pt-6">
+              <div
+                className="ab-stats"
+                style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 12, marginTop: 12 }}
+              >
                 {[
-                  { value: STATS.yearsExperience, label: "Years Experience" },
-                  { value: STATS.projectsCompleted, label: "Projects Done" },
-                  { value: STATS.technologies, label: "Technologies" },
+                  { v: STATS.yearsExperience, l: "Years Exp." },
+                  { v: STATS.projectsCompleted, l: "Projects" },
+                  { v: STATS.technologies, l: "Technologies" },
                 ].map((s, i) => (
                   <div
                     key={i}
-                    className="about-stat text-center py-5 px-3 rounded-2xl border"
-                    style={{ background: "var(--accent-light)", borderColor: "var(--border-accent)" }}
+                    className="ab-stat"
+                    style={{
+                      textAlign: "center",
+                      padding: "18px 10px",
+                      background: "var(--accent-light)",
+                      borderRadius: 10,
+                    }}
                   >
-                    <h4 className="text-2xl font-black gradient-text">{s.value}</h4>
-                    <p className="text-xs mt-1 font-medium" style={{ color: "var(--text-muted)" }}>{s.label}</p>
+                    <p style={{ fontSize: "1.5rem", fontWeight: 800, color: "var(--accent)" }}>{s.v}</p>
+                    <p style={{ fontSize: "0.7rem", color: "var(--text-muted)", marginTop: 4, fontWeight: 600 }}>{s.l}</p>
                   </div>
                 ))}
               </div>
 
-              <div className="pt-4">
-                <a href="#contact" className="btn-primary">
-                  Let's Work Together
-                </a>
+              <div style={{ marginTop: 8 }}>
+                <a href="#contact" className="btn">Let's Talk <IconArrow /></a>
               </div>
             </div>
 
-            {/* Right: Tech Stack */}
-            <div ref={techRef}>
-              <h3 className="text-2xl font-bold text-center mb-8" style={{ color: "var(--text-primary)" }}>
-                Technologies I Work With
-              </h3>
-              <div className="grid grid-cols-3 sm:grid-cols-4 gap-5">
-                {TECH_STACK.map((tech, index) => (
+            <div>
+              <p style={{ fontWeight: 700, fontSize: "0.9rem", color: "var(--text-sub)", marginBottom: 20, textAlign: "center", letterSpacing: "0.03em", textTransform: "uppercase" }}>
+                Tech Stack
+              </p>
+              <div
+                className="tech-grid"
+                style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 12 }}
+              >
+                {TECH_STACK.map((tech, i) => (
                   <div
-                    key={index}
-                    className="tech-card glass-card flex flex-col items-center gap-3 p-4 rounded-2xl cursor-default"
+                    key={i}
+                    className="tech-icon card"
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      gap: 8,
+                      padding: "14px 8px",
+                      borderRadius: 10,
+                      cursor: "default",
+                    }}
                   >
                     <img
                       src={`https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${tech.icon}`}
                       alt={tech.name}
-                      className={`w-10 h-10 ${tech.invert ? "invert opacity-70" : ""}`}
+                      style={{ width: 36, height: 36, filter: tech.invert ? "invert(0.6)" : "none" }}
                     />
-                    <span className="text-xs font-semibold text-center" style={{ color: "var(--text-secondary)" }}>
+                    <span style={{ fontSize: "0.65rem", fontWeight: 600, color: "var(--text-muted)", textAlign: "center" }}>
                       {tech.name}
                     </span>
                   </div>
@@ -305,105 +368,105 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ═══════════════════════ PROJECTS ═══════════════════════ */}
       <section
-        ref={projectsRef}
+        ref={projRef}
         id="projects"
-        className="py-28"
-        style={{ background: "var(--bg)" }}
+        style={{ padding: "100px 0", background: "var(--bg)", borderBottom: "1px solid var(--border)" }}
       >
-        <div className="w-[85%] max-w-6xl mx-auto">
+        <div className="container">
 
-          <div ref={projectsHeadRef} className="text-center mb-16">
-            <span className="accent-badge mb-4 inline-block">My Work</span>
-            <h2 className="text-4xl md:text-5xl font-black mt-3 mb-4" style={{ color: "var(--text-primary)" }}>
-              Featured <span className="gradient-text">Projects</span>
+          <div className="pr-heading" style={{ textAlign: "center", marginBottom: 56 }}>
+            <span className="eyebrow">My Work</span>
+            <h2 style={{ fontSize: "clamp(1.8rem, 3vw, 2.5rem)", fontWeight: 800, letterSpacing: "-0.02em" }}>
+              Featured Projects
             </h2>
-            <div className="section-line mt-4" />
-            <p className="mt-6 max-w-xl mx-auto" style={{ color: "var(--text-muted)" }}>
-              A selection of my recent projects in web and mobile development
+            <div className="divider" />
+            <p style={{ marginTop: 16, color: "var(--text-muted)", fontSize: "0.9rem", maxWidth: 480, margin: "16px auto 0" }}>
+              A selection of recent web & mobile projects
             </p>
           </div>
 
-          <div ref={projectsGridRef} className="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
-            {PROJECTS.map((project, index) => (
-              <div
-                key={index}
-                className="project-card glass-card overflow-hidden rounded-2xl group"
-              >
-                {/* Image */}
-                <div className="relative h-48 overflow-hidden">
-                  <div className="absolute inset-0 z-10 opacity-0 group-hover:opacity-100 transition-all duration-300"
-                    style={{ background: "linear-gradient(180deg, transparent 30%, rgba(99,102,241,0.15) 100%)" }} />
+          <div
+            className="pr-grid"
+            style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 24 }}
+          >
+            {PROJECTS.map((project, i) => (
+              <div key={i} className="pr-card card" style={{ borderRadius: 14, overflow: "hidden" }}>
+                <div style={{ position: "relative", height: 200, overflow: "hidden" }}>
                   <img
                     src={project.image}
                     alt={project.title}
-                    className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+                    style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.4s ease", display: "block" }}
+                    onMouseEnter={e => (e.currentTarget.style.transform = "scale(1.05)")}
+                    onMouseLeave={e => (e.currentTarget.style.transform = "scale(1)")}
                   />
-                  {/* Category pill */}
-                  <div className="absolute top-3 left-3 z-20">
-                    <span className="accent-badge text-xs" style={{ fontSize: "0.65rem" }}>
-                      {project.tech[0]}
-                    </span>
-                  </div>
                 </div>
 
-                <div className="p-6">
-                  <h3
-                    className="text-lg font-bold mb-2 group-hover:text-indigo-600 transition-colors"
-                    style={{ color: "var(--text-primary)" }}
-                  >
+                <div style={{ padding: "22px 22px 20px" }}>
+                  <h3 style={{ fontWeight: 700, fontSize: "1rem", marginBottom: 8, color: "var(--text)" }}>
                     {project.title}
                   </h3>
-                  <p className="text-sm leading-relaxed mb-4 line-clamp-3" style={{ color: "var(--text-muted)" }}>
+                  <p style={{ fontSize: "0.85rem", color: "var(--text-muted)", lineHeight: 1.7, marginBottom: 14, display: "-webkit-box", WebkitLineClamp: 3, WebkitBoxOrient: "vertical", overflow: "hidden" }}>
                     {project.description}
                   </p>
 
-                  {/* Tech tags */}
-                  <div className="flex flex-wrap gap-2 mb-5">
-                    {project.tech.slice(0, 4).map((t, i) => (
-                      <span
-                        key={i}
-                        className="px-2 py-1 rounded-lg text-xs font-semibold"
-                        style={{ background: "var(--accent-light)", color: "var(--accent)" }}
-                      >
-                        {t}
-                      </span>
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: 18 }}>
+                    {project.tech.slice(0, 4).map((t, j) => (
+                      <span key={j} className="tag">{t}</span>
                     ))}
                     {project.tech.length > 4 && (
-                      <span className="px-2 py-1 rounded-lg text-xs font-semibold"
-                        style={{ background: "var(--surface-hover)", color: "var(--text-muted)" }}>
+                      <span className="tag" style={{ background: "var(--bg)", color: "var(--text-muted)" }}>
                         +{project.tech.length - 4}
                       </span>
                     )}
                   </div>
 
-                  {/* Links */}
-                  <div className="flex items-center gap-4 pt-2 border-t" style={{ borderColor: "var(--border)" }}>
+                  <div
+                    style={{
+                      display: "flex",
+                      gap: 12,
+                      paddingTop: 14,
+                      borderTop: "1px solid var(--border)",
+                    }}
+                  >
                     <a
                       href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 text-sm font-medium transition-colors hover:text-indigo-600"
-                      style={{ color: "var(--text-secondary)" }}
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 6,
+                        fontSize: "0.82rem",
+                        fontWeight: 600,
+                        color: "var(--text-sub)",
+                        textDecoration: "none",
+                        transition: "color 0.2s",
+                      }}
+                      onMouseEnter={e => (e.currentTarget.style.color = "var(--accent)")}
+                      onMouseLeave={e => (e.currentTarget.style.color = "var(--text-sub)")}
                     >
-                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
-                      </svg>
-                      Source Code
+                      <IconGithub /> Code
                     </a>
                     {project.link !== "#" && (
                       <a
                         href={project.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-2 text-sm font-medium transition-colors hover:text-indigo-600"
-                        style={{ color: "var(--text-secondary)" }}
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: 6,
+                          fontSize: "0.82rem",
+                          fontWeight: 600,
+                          color: "var(--text-sub)",
+                          textDecoration: "none",
+                          transition: "color 0.2s",
+                        }}
+                        onMouseEnter={e => (e.currentTarget.style.color = "var(--accent)")}
+                        onMouseLeave={e => (e.currentTarget.style.color = "var(--text-sub)")}
                       >
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                        </svg>
-                        Live Demo
+                        <IconExternal /> Live
                       </a>
                     )}
                   </div>
@@ -412,249 +475,187 @@ export default function HomePage() {
             ))}
           </div>
 
-          <div className="text-center mt-14">
-            <a
-              href={SOCIAL_LINKS.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-primary"
-            >
-              View All Projects on GitHub
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
+          <div style={{ textAlign: "center", marginTop: 44 }}>
+            <a href={SOCIAL_LINKS.github} target="_blank" rel="noopener noreferrer" className="btn-ghost">
+              <IconGithub /> All Projects on GitHub
             </a>
           </div>
         </div>
       </section>
 
-      {/* ═══════════════════════ CONTACT ═══════════════════════ */}
       <section
         ref={contactRef}
         id="contact"
-        className="py-28"
-        style={{ background: "var(--bg-secondary)" }}
+        style={{ padding: "100px 0", background: "var(--surface)" }}
       >
-        <div className="w-[85%] max-w-6xl mx-auto">
+        <div className="container">
 
-          <div className="text-center mb-16">
-            <span className="accent-badge mb-4 inline-block">Get In Touch</span>
-            <h2 className="text-4xl md:text-5xl font-black mt-3 mb-4" style={{ color: "var(--text-primary)" }}>
-              Contact <span className="gradient-text">Me</span>
+          <div style={{ textAlign: "center", marginBottom: 56 }}>
+            <span className="eyebrow">Contact</span>
+            <h2 style={{ fontSize: "clamp(1.8rem, 3vw, 2.5rem)", fontWeight: 800, letterSpacing: "-0.02em" }}>
+              Get In Touch
             </h2>
-            <div className="section-line mt-4" />
-            <p className="mt-6 max-w-xl mx-auto" style={{ color: "var(--text-muted)" }}>
-              Have a project in mind or just want to chat? Feel free to reach out!
+            <div className="divider" />
+            <p style={{ marginTop: 16, color: "var(--text-muted)", fontSize: "0.9rem", maxWidth: 440, margin: "16px auto 0" }}>
+              Have a project in mind or just want to say hello? Reach out!
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-12 items-start">
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1.4fr", gap: 48, alignItems: "start" }}>
 
-            {/* Left: Info */}
-            <div ref={contactLeftRef} className="space-y-6">
+            <div className="ct-left" style={{ display: "flex", flexDirection: "column", gap: 20 }}>
               <div>
-                <h3 className="text-2xl font-bold mb-3" style={{ color: "var(--text-primary)" }}>
-                  Let's work together
-                </h3>
-                <p className="leading-relaxed" style={{ color: "var(--text-muted)" }}>
-                  I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
+                <h3 style={{ fontWeight: 700, fontSize: "1.15rem", marginBottom: 10 }}>Let's work together</h3>
+                <p style={{ color: "var(--text-muted)", lineHeight: 1.75, fontSize: "0.9rem" }}>
+                  I'm always open to new projects, creative ideas, and opportunities.
+                  Don't hesitate to reach out!
                 </p>
               </div>
 
-              {/* Contact cards */}
               {[
-                {
-                  icon: (
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                    </svg>
-                  ),
-                  label: "Email",
-                  value: PERSONAL_INFO.email,
-                  href: `mailto:${PERSONAL_INFO.email}`,
-                },
-                {
-                  icon: (
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                    </svg>
-                  ),
-                  label: "Phone",
-                  value: PERSONAL_INFO.phone,
-                  href: `tel:${PERSONAL_INFO.phone}`,
-                },
-                {
-                  icon: (
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                    </svg>
-                  ),
-                  label: "Location",
-                  value: PERSONAL_INFO.location,
-                  href: null,
-                },
+                { icon: <IconMail />, label: "Email", value: PERSONAL_INFO.email, href: `mailto:${PERSONAL_INFO.email}` },
+                { icon: <IconPhone />, label: "Phone", value: PERSONAL_INFO.phone, href: `tel:${PERSONAL_INFO.phone}` },
+                { icon: <IconPin />, label: "Location", value: PERSONAL_INFO.location, href: null },
               ].map((item, i) => (
                 <div
                   key={i}
-                  className="glass-card p-5 rounded-2xl flex items-center gap-4"
+                  className="card"
+                  style={{ padding: "16px 18px", borderRadius: 10, display: "flex", alignItems: "center", gap: 14 }}
                 >
-                  <div
-                    className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
-                    style={{ background: "var(--accent-light)", color: "var(--accent)" }}
-                  >
+                  <div style={{
+                    width: 40, height: 40, borderRadius: 8, background: "var(--accent-light)",
+                    color: "var(--accent)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
+                  }}>
                     {item.icon}
                   </div>
                   <div>
-                    <p className="text-xs font-semibold uppercase tracking-wide mb-1" style={{ color: "var(--text-muted)" }}>
+                    <p style={{ fontSize: "0.7rem", fontWeight: 700, color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 2 }}>
                       {item.label}
                     </p>
-                    {item.href ? (
-                      <a href={item.href} className="font-semibold hover:text-indigo-600 transition-colors" style={{ color: "var(--text-primary)" }}>
-                        {item.value}
-                      </a>
-                    ) : (
-                      <p className="font-semibold" style={{ color: "var(--text-primary)" }}>{item.value}</p>
-                    )}
+                    {item.href
+                      ? <a href={item.href} style={{ fontSize: "0.875rem", fontWeight: 600, color: "var(--text)", textDecoration: "none" }}
+                        onMouseEnter={e => (e.currentTarget.style.color = "var(--accent)")}
+                        onMouseLeave={e => (e.currentTarget.style.color = "var(--text)")}
+                      >{item.value}</a>
+                      : <p style={{ fontSize: "0.875rem", fontWeight: 600, color: "var(--text)" }}>{item.value}</p>
+                    }
                   </div>
                 </div>
               ))}
 
-              {/* Social */}
-              <div className="pt-2">
-                <p className="text-sm font-semibold mb-3" style={{ color: "var(--text-muted)" }}>Follow me on</p>
-                <div className="flex gap-3">
+              <div style={{ display: "flex", gap: 10, paddingTop: 4 }}>
+                {[
+                  { href: SOCIAL_LINKS.github, label: "GitHub" },
+                  { href: SOCIAL_LINKS.linkedin, label: "LinkedIn" },
+                ].map((s, i) => (
                   <a
+                    key={i}
+                    href={s.href}
                     target="_blank"
-                    href={SOCIAL_LINKS.github}
                     rel="noopener noreferrer"
-                    className="glass-card w-12 h-12 rounded-xl flex items-center justify-center hover:border-indigo-300 transition-all"
+                    className="btn-ghost"
+                    style={{ fontSize: "0.78rem", padding: "8px 18px" }}
                   >
-                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" style={{ color: "var(--accent)" }}>
-                      <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
-                    </svg>
+                    {s.label}
                   </a>
-                  <a
-                    target="_blank"
-                    href={SOCIAL_LINKS.linkedin}
-                    rel="noopener noreferrer"
-                    className="glass-card w-12 h-12 rounded-xl flex items-center justify-center hover:border-indigo-300 transition-all"
-                  >
-                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" style={{ color: "var(--accent)" }}>
-                      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                    </svg>
-                  </a>
-                </div>
+                ))}
               </div>
             </div>
 
-            {/* Right: Form */}
-            <div ref={contactRightRef}>
-              <div
-                className="glass-card p-8 rounded-2xl"
-                style={{ background: "var(--surface)" }}
-              >
-                <h3 className="text-xl font-bold mb-6" style={{ color: "var(--text-primary)" }}>
-                  Send me a message ✉️
-                </h3>
-                <form className="space-y-5">
+            <div
+              className="ct-right card"
+              style={{ padding: "32px 32px", borderRadius: 16 }}
+            >
+              <h3 style={{ fontWeight: 700, fontSize: "1.05rem", marginBottom: 24, color: "var(--text)" }}>
+                Send a message
+              </h3>
+              <form style={{ display: "flex", flexDirection: "column", gap: 18 }}>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
                   {[
-                    { label: "Your Name", type: "text", placeholder: "John Doe" },
-                    { label: "Your Email", type: "email", placeholder: "john@example.com" },
-                    { label: "Subject", type: "text", placeholder: "Project Discussion" },
-                  ].map((field) => (
-                    <div key={field.label}>
-                      <label
-                        className="block text-sm font-semibold mb-2"
-                        style={{ color: "var(--text-secondary)" }}
-                      >
-                        {field.label}
-                      </label>
+                    { label: "Name", type: "text", placeholder: "John Doe" },
+                    { label: "Email", type: "email", placeholder: "john@example.com" },
+                  ].map(f => (
+                    <div key={f.label}>
+                      <label style={{ display: "block", fontSize: "0.78rem", fontWeight: 600, color: "var(--text-sub)", marginBottom: 6 }}>{f.label}</label>
                       <input
-                        type={field.type}
-                        placeholder={field.placeholder}
-                        className="w-full rounded-xl px-4 py-3 text-sm outline-none transition-all"
-                        style={{
-                          background: "var(--bg)",
-                          border: "1.5px solid var(--border)",
-                          color: "var(--text-primary)",
-                        }}
-                        onFocus={(e) => (e.target.style.borderColor = "var(--accent)")}
-                        onBlur={(e) => (e.target.style.borderColor = "var(--border)")}
+                        type={f.type}
+                        placeholder={f.placeholder}
+                        style={inputStyle}
+                        onFocus={e => (e.target.style.borderColor = "var(--accent)")}
+                        onBlur={e => (e.target.style.borderColor = "var(--border)")}
                       />
                     </div>
                   ))}
+                </div>
 
-                  <div>
-                    <label className="block text-sm font-semibold mb-2" style={{ color: "var(--text-secondary)" }}>
-                      Message
-                    </label>
-                    <textarea
-                      rows={4}
-                      placeholder="Tell me about your project..."
-                      className="w-full rounded-xl px-4 py-3 text-sm outline-none transition-all resize-none"
-                      style={{
-                        background: "var(--bg)",
-                        border: "1.5px solid var(--border)",
-                        color: "var(--text-primary)",
-                      }}
-                      onFocus={(e) => (e.target.style.borderColor = "var(--accent)")}
-                      onBlur={(e) => (e.target.style.borderColor = "var(--border)")}
-                    />
-                  </div>
+                <div>
+                  <label style={{ display: "block", fontSize: "0.78rem", fontWeight: 600, color: "var(--text-sub)", marginBottom: 6 }}>Subject</label>
+                  <input
+                    type="text"
+                    placeholder="Project Discussion"
+                    style={inputStyle}
+                    onFocus={e => (e.target.style.borderColor = "var(--accent)")}
+                    onBlur={e => (e.target.style.borderColor = "var(--border)")}
+                  />
+                </div>
 
-                  <button type="submit" className="btn-primary w-full justify-center">
-                    Send Message
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                    </svg>
-                  </button>
-                </form>
-              </div>
+                <div>
+                  <label style={{ display: "block", fontSize: "0.78rem", fontWeight: 600, color: "var(--text-sub)", marginBottom: 6 }}>Message</label>
+                  <textarea
+                    rows={5}
+                    placeholder="Tell me about your project..."
+                    style={{ ...inputStyle, resize: "none" }}
+                    onFocus={e => (e.target.style.borderColor = "var(--accent)")}
+                    onBlur={e => (e.target.style.borderColor = "var(--border)")}
+                  />
+                </div>
+
+                <button type="submit" className="btn" style={{ justifyContent: "center" }}>
+                  Send Message <IconSend />
+                </button>
+              </form>
             </div>
-
           </div>
         </div>
       </section>
 
-      {/* ═══════════════════════ FOOTER ═══════════════════════ */}
-      <footer
-        className="py-10 border-t"
-        style={{ background: "var(--bg)", borderColor: "var(--border)" }}
-      >
-        <div className="w-[85%] max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-          <div className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: "linear-gradient(135deg, #6366f1, #818cf8)" }}>
-              <span className="text-white font-black text-xs">YL</span>
+      <footer style={{
+        padding: "28px 0",
+        borderTop: "1px solid var(--border)",
+        background: "var(--bg)",
+      }}>
+        <div className="container" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+            <div style={{
+              width: 28, height: 28, borderRadius: 7,
+              background: "var(--accent)", display: "flex", alignItems: "center", justifyContent: "center",
+            }}>
+              <span style={{ color: "#fff", fontWeight: 900, fontSize: "0.7rem" }}>YL</span>
             </div>
-            <span className="font-bold text-sm" style={{ color: "var(--text-primary)" }}>
-              Youssef Labnine
-            </span>
+            <span style={{ fontWeight: 700, fontSize: "0.875rem" }}>Youssef Labnine</span>
           </div>
 
-          <p className="text-sm" style={{ color: "var(--text-muted)" }}>
-            © {new Date().getFullYear()} Youssef Labnine. All rights reserved.
+          <p style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>
+            © {new Date().getFullYear()} · All rights reserved
           </p>
 
-          <div className="flex gap-4">
-            <a
-              href={SOCIAL_LINKS.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm font-medium hover:text-indigo-600 transition-colors"
-              style={{ color: "var(--text-muted)" }}
-            >
-              GitHub
-            </a>
-            <a
-              href={SOCIAL_LINKS.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm font-medium hover:text-indigo-600 transition-colors"
-              style={{ color: "var(--text-muted)" }}
-            >
-              LinkedIn
-            </a>
+          <div style={{ display: "flex", gap: 20 }}>
+            {[
+              { label: "GitHub", href: SOCIAL_LINKS.github },
+              { label: "LinkedIn", href: SOCIAL_LINKS.linkedin },
+            ].map(s => (
+              <a
+                key={s.label}
+                href={s.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ fontSize: "0.8rem", fontWeight: 600, color: "var(--text-muted)", textDecoration: "none" }}
+                onMouseEnter={e => (e.currentTarget.style.color = "var(--accent)")}
+                onMouseLeave={e => (e.currentTarget.style.color = "var(--text-muted)")}
+              >
+                {s.label}
+              </a>
+            ))}
           </div>
         </div>
       </footer>
