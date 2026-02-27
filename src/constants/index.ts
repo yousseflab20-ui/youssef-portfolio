@@ -1,14 +1,14 @@
 
 export const PERSONAL_INFO = {
     name: "YOUSSEF LABNINE",
-    title: "Web & Mobile Developer",
+    title: "Mobile & Web Developer",
     email: "yousseflab20@gmail.com",
     phone: "+212 718-799401",
     location: "Agadir, Morocco",
     bio: "Based in Morocco, I build scalable web applications and high-performance mobile apps using modern technologies, focusing on clean architecture, performance, and user-centered design. I’m passionate about solving real-world problems and transforming ideas into reliable digital products. Let’s build something great together.",
     about: {
-        intro: "I'm a Full Stack Mobile & Web Developer focused on building scalable, high-performance applications. I combine clean architecture with modern UI/UX principles to deliver reliable and efficient digital products.",
-        specialization: "I specialize in designing robust backend systems and intuitive frontend experiences using modern JavaScript technologies. My goal is not just to write code — but to solve real business problems.",
+        intro: "I'm a Mobile & Web Developer focused on building scalable, high-performance applications. I combine clean architecture with modern UI/UX principles to deliver reliable and efficient digital products.",
+        specialization: "I specialize in designing robust backend systems and intuitive frontend/mobile experiences using modern JavaScript technologies. My goal is not just to write code — but to solve real business problems.",
         goal: "I am continuously improving my skills, exploring new technologies, and building production-ready solutions that scale."
     }
 };
@@ -25,21 +25,21 @@ export const SOCIAL_LINKS = {
 };
 
 export const TECH_STACK = [
-    { name: "React", icon: "react/react-original.svg" },
+    { name: "React.js", icon: "react/react-original.svg" },
     { name: "React Native", icon: "react/react-original.svg" },
-    { name: "TypeScript", icon: "typescript/typescript-original.svg" },
-    { name: "JavaScript", icon: "javascript/javascript-original.svg" },
+    { name: "Expo", icon: "expo/expo-original.svg" },
     { name: "Node.js", icon: "nodejs/nodejs-original.svg" },
-    { name: "Express", icon: "express/express-original.svg", invert: true },
-    { name: "PostgreSQL", icon: "postgresql/postgresql-original.svg" },
+    { name: "Express.js", icon: "express/express-original.svg" },
+    { name: "JavaScript", icon: "javascript/javascript-original.svg" },
+    { name: "TypeScript", icon: "typescript/typescript-original.svg" },
+    { name: "Postgres", icon: "postgresql/postgresql-original.svg" },
+    { name: "SQL", icon: "azuresqldatabase/azuresqldatabase-original.svg" },
     { name: "Docker", icon: "docker/docker-original.svg" },
-    { name: "HTML5", icon: "html5/html5-original.svg" },
-    { name: "CSS3", icon: "css3/css3-original.svg" },
     { name: "Jest", icon: "jest/jest-plain.svg" },
+    { name: "HTML", icon: "html5/html5-original.svg" },
+    { name: "CSS", icon: "css3/css3-original.svg" },
     { name: "Figma", icon: "figma/figma-original.svg" },
     { name: "Jira", icon: "jira/jira-original.svg" },
-    { name: "MySQL", icon: "mysql/mysql-original.svg" },
-    { name: "Expo", icon: "expo/expo-original.svg" },
 ];
 
 export const PROJECTS = [
