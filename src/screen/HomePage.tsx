@@ -176,7 +176,7 @@ export default function HomePage() {
                     <img
                       src={`https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${tech.icon}`}
                       alt={tech.name}
-                      className={`w-8 h-8 ${tech.invert ? 'invert opacity-70' : ''}`}
+                      className="w-8 h-8"
                     />
                     <span className="text-[10px] sm:text-xs font-bold text-zinc-500 text-center uppercase tracking-wider">
                       {tech.name}
