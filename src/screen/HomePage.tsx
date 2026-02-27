@@ -3,7 +3,7 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Navbar from "../components/Navbar";
-import profileImg from "../assets/images/image-test.png";
+import profileImg from "../assets/images/my-photo.png";
 import { PERSONAL_INFO, STATS, SOCIAL_LINKS, PROJECTS, TECH_STACK } from "../constants";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -117,22 +117,26 @@ export default function HomePage() {
           </div>
 
           <div className="hero-image flex-1 flex justify-center md:justify-end relative">
-            <div className="relative w-full max-w-[480px]">
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full pt-[100%] rounded-full bg-blue-50 -z-10"></div>
+            <div className="relative w-full max-w-[500px]">
+              {/* Outer Glow / Decoration */}
+              <div className="absolute inset-0 scale-[1.1] rounded-full bg-blue-50 -z-10 shadow-inner"></div>
 
-              <img
-                src={profileImg}
-                alt={PERSONAL_INFO.name}
-                className="w-full relative z-10 scale-105 drop-shadow-2xl"
-                style={{ maskImage: 'linear-gradient(to bottom, black 80%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to bottom, black 80%, transparent 100%)' }}
-              />
+              {/* Clean Circular Frame */}
+              <div className="relative aspect-square rounded-full border-[6px] border-white shadow-xl shadow-zinc-200/50 overflow-hidden bg-zinc-100 flex items-center justify-center">
+                <img
+                  src={profileImg}
+                  alt={PERSONAL_INFO.name}
+                  className="w-full h-full object-cover scale-105"
+                />
+              </div>
 
-              <div className="absolute bottom-10 -left-6 bg-white p-4 rounded-2xl shadow-xl shadow-zinc-200 border border-zinc-100 flex items-center gap-3 z-20">
+              {/* Floating Badge */}
+              <div className="absolute bottom-4 -left-4 bg-white px-5 py-3 rounded-2xl shadow-xl shadow-zinc-200 border border-zinc-100 flex items-center gap-3 z-20">
                 <div className="flex h-3 w-3 relative">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
                 </div>
-                <span className="text-sm font-bold text-zinc-800">Available for work</span>
+                <span className="text-sm font-bold text-zinc-800 tracking-wide">Available for work</span>
               </div>
             </div>
           </div>
