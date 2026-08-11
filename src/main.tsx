@@ -1,6 +1,7 @@
 import ReactDOM from "react-dom/client"
 import Lenis from "lenis"
 import { useEffect } from "react"
+import { HelmetProvider } from "react-helmet-async"
 import HomePage from "./screen/HomePage"
 import "./screen/index.css"
 
@@ -17,7 +18,11 @@ function App() {
     requestAnimationFrame(raf)
   }, [])
 
-  return <HomePage />
+  return (
+    <HelmetProvider>
+      <HomePage />
+    </HelmetProvider>
+  )
 }
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
