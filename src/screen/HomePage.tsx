@@ -1,5 +1,6 @@
 import "./index.css";
 import { useEffect, useRef } from "react";
+import { Helmet } from "react-helmet-async";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Navbar from "../components/Navbar";
@@ -69,6 +70,18 @@ export default function HomePage() {
 
   return (
     <div ref={containerRef} className="bg-[#fcfcfc] min-h-screen font-sans selection:bg-blue-600 selection:text-white">
+      <Helmet>
+        <title>Youssef Labnine | Full Stack Developer</title>
+        <meta name="description" content="Portfolio of Youssef Labnine, a Full Stack Developer specialized in React, TypeScript, Node.js, and modern web animations." />
+        
+        {/* Open Graph / LinkedIn / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://yousseflabnine.github.io/youssef-portfolio/" />
+        <meta property="og:title" content="Youssef Labnine | Full Stack Developer" />
+        <meta property="og:description" content="Modern, high-performance personal portfolio built with React and TypeScript." />
+        <meta property="og:image" content="https://yousseflabnine.github.io/youssef-portfolio/og-image.png" />
+      </Helmet>
+      
       <Navbar />
       <HeroSection />
       <AboutSection />

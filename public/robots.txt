@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://yousseflabnine.github.io/youssef-portfolio/sitemap.xml
