@@ -2,45 +2,68 @@ import { PERSONAL_INFO, TECH_STACK } from "../constants";
 
 export default function AboutSection() {
   return (
-    <section id="about" className="py-24 bg-white border-b border-zinc-100">
-      <div className="w-[80%] max-w-7xl mx-auto">
+    <section id="about" className="relative py-28 overflow-hidden">
+      {/* Background glow */}
+      <div className="absolute top-1/2 left-0 w-96 h-96 bg-violet-600/8 rounded-full blur-[120px] pointer-events-none" />
 
-        <div className="text-center mb-16 fade-up">
-          <span className="text-blue-600 font-bold tracking-widest uppercase text-xs mb-3 block">Get to know me</span>
-          <h2 className="text-4xl md:text-5xl font-extrabold text-zinc-900">About Me</h2>
-          <div className="w-16 h-1.5 bg-blue-600 rounded-full mx-auto mt-6"></div>
+      <div className="relative z-10 w-[85%] max-w-7xl mx-auto">
+
+        {/* Section header */}
+        <div className="text-center mb-20 fade-up">
+          <span className="inline-block px-3 py-1 rounded-full glass text-violet-300 text-xs font-bold tracking-widest uppercase mb-4">
+            Get to know me
+          </span>
+          <h2 className="text-4xl md:text-5xl font-black text-white tracking-tight">
+            About <span className="gradient-text">Me</span>
+          </h2>
+          <div className="w-16 h-px bg-gradient-to-r from-transparent via-violet-500 to-transparent mx-auto mt-6" />
         </div>
 
-        <div className="grid md:grid-cols-2 gap-16 items-start">
+        <div className="grid lg:grid-cols-2 gap-16 items-start">
 
+          {/* Left — Bio */}
           <div className="about-content space-y-6">
-            <p className="text-lg text-zinc-600 font-medium leading-relaxed">
-              {PERSONAL_INFO.about.intro}
-            </p>
-            <p className="text-zinc-500 font-medium leading-relaxed">
-              {PERSONAL_INFO.about.specialization}
-            </p>
-            <p className="text-zinc-500 font-medium leading-relaxed">
-              {PERSONAL_INFO.about.goal}
-            </p>
-            <div className="pt-6">
-              <a href="#contact" className="inline-flex items-center gap-2 px-6 py-3 bg-zinc-900 text-white font-bold rounded-lg hover:bg-black transition-colors">
-                Let's Work Together
-              </a>
+            <div className="glass gradient-border rounded-2xl p-8 space-y-5">
+              <p className="text-slate-300 leading-relaxed text-base">
+                {PERSONAL_INFO.about.intro}
+              </p>
+              <p className="text-slate-400 leading-relaxed text-sm">
+                {PERSONAL_INFO.about.specialization}
+              </p>
+              <p className="text-slate-400 leading-relaxed text-sm">
+                {PERSONAL_INFO.about.goal}
+              </p>
             </div>
+
+            <a
+              href="#contact"
+              className="inline-flex items-center gap-3 px-7 py-3.5 bg-violet-600 hover:bg-violet-500 text-white font-bold rounded-xl transition-all duration-300 shadow-lg shadow-violet-600/30 hover:-translate-y-0.5"
+            >
+              Let's Work Together
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
           </div>
 
+          {/* Right — Tech Stack */}
           <div>
-            <h3 className="text-xl font-bold text-zinc-900 mb-8 text-center md:text-left">Technologies I Work With</h3>
-            <div className="grid grid-cols-4 sm:grid-cols-5 gap-4">
+            <h3 className="text-lg font-bold text-white mb-6 flex items-center gap-2">
+              <span className="w-1.5 h-5 rounded-full bg-violet-500" />
+              Technologies I Work With
+            </h3>
+            <div className="grid grid-cols-4 sm:grid-cols-5 gap-3">
               {TECH_STACK.map((tech, idx) => (
-                <div key={idx} className="tech-card flex flex-col items-center gap-3 p-4 bg-zinc-50 rounded-xl border border-zinc-100 hover:border-blue-200 hover:bg-white hover:shadow-md transition-all">
+                <div
+                  key={idx}
+                  className="tech-card glass glass-hover rounded-xl p-3 flex flex-col items-center gap-2 group"
+                >
                   <img
                     src={`https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${tech.icon}`}
                     alt={tech.name}
-                    className="w-8 h-8"
+                    className="w-7 h-7 group-hover:scale-110 transition-transform duration-300"
                   />
-                  <span className="text-[10px] sm:text-xs font-bold text-zinc-500 text-center uppercase tracking-wider">
+                  <span className="text-[9px] font-bold text-slate-500 uppercase tracking-wider text-center leading-tight">
                     {tech.name}
                   </span>
                 </div>

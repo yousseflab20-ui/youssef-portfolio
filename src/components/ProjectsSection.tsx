@@ -3,67 +3,102 @@ import { IconGithub, IconExternal } from "./Icons";
 
 export default function ProjectsSection() {
   return (
-    <section id="projects" className="py-24 bg-[#fcfcfc] border-b border-zinc-100">
-      <div className="w-[80%] max-w-7xl mx-auto">
+    <section id="projects" className="relative py-28 overflow-hidden">
+      <div className="absolute top-0 right-0 w-96 h-96 bg-blue-600/8 rounded-full blur-[120px] pointer-events-none" />
 
-        <div className="text-center mb-16 fade-up">
-          <span className="text-blue-600 font-bold tracking-widest uppercase text-xs mb-3 block">My Work</span>
-          <h2 className="text-4xl md:text-5xl font-extrabold text-zinc-900">Featured Projects</h2>
-          <div className="w-16 h-1.5 bg-blue-600 rounded-full mx-auto mt-6"></div>
+      <div className="relative z-10 w-[85%] max-w-7xl mx-auto">
+
+        {/* Header */}
+        <div className="text-center mb-20 fade-up">
+          <span className="inline-block px-3 py-1 rounded-full glass text-violet-300 text-xs font-bold tracking-widest uppercase mb-4">
+            My Work
+          </span>
+          <h2 className="text-4xl md:text-5xl font-black text-white tracking-tight">
+            Featured <span className="gradient-text">Projects</span>
+          </h2>
+          <div className="w-16 h-px bg-gradient-to-r from-transparent via-violet-500 to-transparent mx-auto mt-6" />
         </div>
 
-        <div className="grid md:grid-cols-2 gap-10">
+        {/* Projects grid */}
+        <div className="grid md:grid-cols-2 gap-6">
           {PROJECTS.map((project, idx) => (
-            <div key={idx} className="project-card bg-white rounded-2xl border border-zinc-200 overflow-hidden hover:shadow-xl hover:shadow-zinc-200/50 transition-shadow flex flex-col group">
-
-              <div className="relative h-60 overflow-hidden bg-zinc-100">
+            <div
+              key={idx}
+              className="project-card glass glass-hover gradient-border rounded-2xl overflow-hidden flex flex-col group"
+            >
+              {/* Image */}
+              <div className="relative h-52 overflow-hidden">
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out opacity-60 group-hover:opacity-80"
                 />
+                {/* Overlay gradient */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-[#0a0a0f]/40 to-transparent" />
+                {/* Project number */}
+                <div className="absolute top-4 right-4 w-10 h-10 glass rounded-xl flex items-center justify-center text-xs font-black text-violet-300">
+                  {String(idx + 1).padStart(2, "0")}
+                </div>
               </div>
 
-              <div className="p-8 flex-1 flex flex-col">
-                <h3 className="text-2xl font-bold text-zinc-900 mb-3 group-hover:text-blue-600 transition-colors">
+              {/* Content */}
+              <div className="p-7 flex-1 flex flex-col">
+                <h3 className="text-xl font-bold text-white mb-2 group-hover:text-violet-300 transition-colors duration-300">
                   {project.title}
                 </h3>
-                <p className="text-zinc-500 font-medium leading-relaxed mb-6">
+                <p className="text-slate-400 text-sm leading-relaxed mb-5 flex-1">
                   {project.description}
                 </p>
 
-                <div className="flex flex-wrap gap-2 mb-8">
+                {/* Tech tags */}
+                <div className="flex flex-wrap gap-1.5 mb-6">
                   {project.tech.slice(0, 5).map((t, i) => (
-                    <span key={i} className="px-3 py-1 bg-zinc-100 text-zinc-600 rounded-md text-xs font-bold">
+                    <span key={i} className="px-2.5 py-1 glass rounded-md text-[10px] font-bold text-slate-400 uppercase tracking-wider">
                       {t}
                     </span>
                   ))}
                   {project.tech.length > 5 && (
-                    <span className="px-3 py-1 bg-zinc-50 text-zinc-400 rounded-md text-xs font-bold">
+                    <span className="px-2.5 py-1 glass rounded-md text-[10px] font-bold text-violet-400 uppercase tracking-wider">
                       +{project.tech.length - 5}
                     </span>
                   )}
                 </div>
 
-                <div className="mt-auto flex gap-4 pt-6 border-t border-zinc-100">
-                  <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-zinc-600 font-bold hover:text-blue-600 transition-colors">
-                    <IconGithub /> Code
+                {/* Links */}
+                <div className="flex gap-5 pt-5 border-t border-white/5">
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-sm font-bold text-slate-400 hover:text-violet-400 transition-colors duration-300"
+                  >
+                    <IconGithub /> View Code
                   </a>
                   {project.link !== "#" && (
-                    <a href={project.link} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-zinc-600 font-bold hover:text-blue-600 transition-colors ml-4">
+                    <a
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 text-sm font-bold text-slate-400 hover:text-violet-400 transition-colors duration-300"
+                    >
                       <IconExternal /> Live Demo
                     </a>
                   )}
                 </div>
               </div>
-
             </div>
           ))}
         </div>
 
-        <div className="text-center mt-16">
-          <a href={SOCIAL_LINKS.github} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-8 py-3.5 bg-zinc-900 hover:bg-black text-white font-bold rounded-full transition-colors">
-            <IconGithub /> View All Projects
+        {/* View all */}
+        <div className="text-center mt-14">
+          <a
+            href={SOCIAL_LINKS.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-8 py-3.5 glass glass-hover text-white font-bold rounded-xl transition-all duration-300 hover:-translate-y-0.5"
+          >
+            <IconGithub /> View All on GitHub
           </a>
         </div>
 

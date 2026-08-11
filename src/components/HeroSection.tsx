@@ -1,85 +1,177 @@
+import { useEffect, useState } from "react";
 import profileImg from "../assets/images/my-photo.png";
-import { PERSONAL_INFO, STATS, SOCIAL_LINKS } from "../constants";
+import { PERSONAL_INFO, SOCIAL_LINKS, STATS } from "../constants";
 import { IconGithub } from "./Icons";
+
+const TERMINAL_LINES = [
+  { text: "const developer = {", color: "text-slate-300" },
+  { text: `  name: "Youssef Labnine",`, color: "text-violet-300" },
+  { text: `  role: "Mobile & Web Developer",`, color: "text-blue-300" },
+  { text: `  location: "Agadir, Morocco 🇲🇦",`, color: "text-emerald-300" },
+  { text: `  status: "Available for work ✓",`, color: "text-emerald-400" },
+  { text: "}", color: "text-slate-300" },
+];
+
+function TerminalWindow() {
+  const [displayedLines, setDisplayedLines] = useState<{ text: string; color: string; done: boolean }[]>([]);
+  const [currentLineIdx, setCurrentLineIdx] = useState(0);
+  const [currentChar, setCurrentChar] = useState(0);
+  const [done, setDone] = useState(false);
+
+  useEffect(() => {
+    if (done) return;
+    if (currentLineIdx >= TERMINAL_LINES.length) {
+      setDone(true);
+      return;
+    }
+
+    const line = TERMINAL_LINES[currentLineIdx];
+
+    if (currentChar < line.text.length) {
+      const timer = setTimeout(() => {
+        setDisplayedLines(prev => {
+          const next = [...prev];
+          if (next[currentLineIdx]) {
+            next[currentLineIdx] = { ...line, text: line.text.slice(0, currentChar + 1), done: false };
+          } else {
+            next.push({ ...line, text: line.text.slice(0, currentChar + 1), done: false });
+          }
+          return next;
+        });
+        setCurrentChar(c => c + 1);
+      }, 28);
+      return () => clearTimeout(timer);
+    } else {
+      // Line done
+      setDisplayedLines(prev => {
+        const next = [...prev];
+        next[currentLineIdx] = { ...line, done: true };
+        return next;
+      });
+      const timer = setTimeout(() => {
+        setCurrentLineIdx(i => i + 1);
+        setCurrentChar(0);
+      }, 60);
+      return () => clearTimeout(timer);
+    }
+  }, [currentChar, currentLineIdx, done]);
+
+  return (
+    <div className="glass gradient-border rounded-2xl overflow-hidden w-full max-w-xl font-mono text-sm shadow-2xl shadow-violet-900/20">
+      {/* Terminal header */}
+      <div className="flex items-center gap-2 px-4 py-3 border-b border-white/5 bg-white/[0.02]">
+        <span className="w-3 h-3 rounded-full bg-red-500 opacity-80" />
+        <span className="w-3 h-3 rounded-full bg-yellow-500 opacity-80" />
+        <span className="w-3 h-3 rounded-full bg-green-500 opacity-80" />
+        <span className="ml-4 text-xs text-white/30 tracking-widest">portfolio.ts</span>
+      </div>
+      {/* Terminal body */}
+      <div className="p-5 space-y-1 min-h-[180px]">
+        <p className="text-white/20 text-xs mb-3">~ node portfolio.ts</p>
+        {displayedLines.map((line, i) => (
+          <div key={i} className={`${line.color} leading-relaxed`}>
+            {line.text}
+            {i === currentLineIdx && !done && (
+              <span className="terminal-cursor ml-[1px] text-violet-400">▋</span>
+            )}
+          </div>
+        ))}
+        {done && <span className="terminal-cursor text-violet-400">▋</span>}
+      </div>
+    </div>
+  );
+}
 
 export default function HeroSection() {
   return (
-    <section id="home" className="pt-40 md:pt-48 pb-20 overflow-hidden relative border-b border-zinc-100">
-      <div className="w-[80%] max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-16">
+    <section id="home" className="relative min-h-screen flex items-center pt-24 pb-16 overflow-hidden">
+      {/* Radial glow background */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-violet-600/10 rounded-full blur-[120px]" />
+        <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-blue-600/8 rounded-full blur-[100px]" />
+      </div>
 
-        <div className="hero-text flex-1">
-          <span className="text-blue-600 font-bold tracking-widest uppercase text-sm mb-4 block">
-            Hello, I am
-          </span>
+      <div className="relative z-10 w-[85%] max-w-7xl mx-auto">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-16">
 
-          <h1 className="text-5xl md:text-7xl font-extrabold text-zinc-900 tracking-tight leading-[1.1] mb-6">
-            {PERSONAL_INFO.name}
-          </h1>
+          {/* Left — Text + Terminal */}
+          <div className="hero-text flex-1 space-y-8">
+            <div>
+              <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass text-xs font-semibold text-violet-300 tracking-widest uppercase mb-6">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                Available for work
+              </span>
+              <h1 className="text-5xl md:text-6xl xl:text-7xl font-black tracking-tight leading-[1.05] text-white">
+                {PERSONAL_INFO.name.split(" ").map((word, i) => (
+                  <span key={i} className={i === 1 ? "gradient-text block" : "block"}>
+                    {word}
+                  </span>
+                ))}
+              </h1>
+              <p className="text-lg text-slate-400 font-medium mt-4 max-w-md leading-relaxed">
+                {PERSONAL_INFO.bio}
+              </p>
+            </div>
 
-          <h2 className="text-2xl md:text-3xl text-zinc-600 font-bold mb-8">
-            I am a <span className="text-blue-600">{PERSONAL_INFO.title}</span>
-          </h2>
+            {/* CTA buttons */}
+            <div className="flex flex-wrap gap-4">
+              <a
+                href="#contact"
+                className="group relative px-7 py-3.5 bg-violet-600 hover:bg-violet-500 text-white font-bold rounded-xl transition-all duration-300 shadow-lg shadow-violet-600/30 hover:shadow-violet-500/40 hover:-translate-y-0.5"
+              >
+                Let's Talk
+              </a>
+              <a
+                href={SOCIAL_LINKS.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-7 py-3.5 glass glass-hover text-slate-300 font-bold rounded-xl flex items-center gap-2 hover:-translate-y-0.5 transition-all duration-300"
+              >
+                <IconGithub /> GitHub
+              </a>
+              <a
+                href="/youssef-portfolio/cv-youssef-labnine.pdf"
+                download="Cv-Youssef-Labnine.pdf"
+                className="px-7 py-3.5 glass glass-hover text-slate-300 font-bold rounded-xl flex items-center gap-2 hover:-translate-y-0.5 transition-all duration-300"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 4v12m0 0l-4-4m4 4l4-4M4 20h16" />
+                </svg>
+                Download CV
+              </a>
+            </div>
 
-          <p className="text-lg text-zinc-500 font-medium leading-relaxed mb-10 max-w-lg">
-            {PERSONAL_INFO.bio}
-          </p>
-
-          <div className="flex flex-wrap items-center gap-5">
-            <a href="#contact" className="px-8 py-3.5 bg-blue-600 text-white font-bold rounded-full hover:bg-blue-700 transition-colors shadow-lg shadow-blue-600/20">
-              Contact Me
-            </a>
-            <a href={SOCIAL_LINKS.github} target="_blank" rel="noopener noreferrer" className="px-8 py-3.5 bg-white text-zinc-900 font-bold rounded-full border border-zinc-200 hover:border-zinc-300 hover:bg-zinc-50 transition-colors flex items-center gap-2">
-              <IconGithub /> GitHub
-            </a>
-            <a
-              href="/youssef-portfolio/cv-youssef-labnine.pdf"
-              download="Cv-Youssef-Labnine.pdf"
-              className="px-8 py-3.5 bg-zinc-900 text-white font-bold rounded-full border border-zinc-800 hover:bg-blue-600 hover:border-blue-600 transition-all flex items-center gap-2 group shadow-lg shadow-zinc-900/20"
-            >
-              <svg className="w-4 h-4 transition-transform group-hover:translate-y-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 4v12m0 0l-4-4m4 4l4-4M4 20h16" />
-              </svg>
-              Download CV
-            </a>
+            {/* Stats */}
+            <div className="flex items-center gap-8 pt-4 border-t border-white/5">
+              {[
+                { value: STATS.yearsExperience, label: "Years Experience" },
+                { value: STATS.projectsCompleted, label: "Projects Done" },
+                { value: STATS.technologies, label: "Technologies" },
+              ].map((s, i) => (
+                <div key={i}>
+                  <p className="text-3xl font-black gradient-text">{s.value}</p>
+                  <p className="text-xs font-semibold text-slate-500 mt-1 uppercase tracking-wider">{s.label}</p>
+                </div>
+              ))}
+            </div>
           </div>
 
-          <div className="flex items-center gap-10 mt-16 pt-8 border-t border-zinc-100">
-            <div>
-              <p className="text-3xl font-black text-zinc-900">{STATS.yearsExperience}</p>
-              <p className="text-sm font-semibold text-zinc-500 mt-1">Years Experience</p>
-            </div>
-            <div>
-              <p className="text-3xl font-black text-zinc-900">{STATS.projectsCompleted}</p>
-              <p className="text-sm font-semibold text-zinc-500 mt-1">Projects Completed</p>
-            </div>
-          </div>
-        </div>
-
-        <div className="hero-image flex-1 flex justify-center md:justify-end relative">
-          <div className="relative w-full max-w-[500px]">
-            {/* Outer Glow / Decoration */}
-            <div className="absolute inset-0 scale-[1.1] rounded-full bg-blue-50 -z-10 shadow-inner"></div>
-
-            {/* Clean Circular Frame */}
-            <div className="relative aspect-square rounded-full border-[6px] border-white shadow-xl shadow-zinc-200/50 overflow-hidden bg-zinc-100 flex items-center justify-center">
-              <img
-                src={profileImg}
-                alt={PERSONAL_INFO.name}
-                className="w-full h-full object-cover scale-105"
-              />
-            </div>
-
-            {/* Floating Badge */}
-            <div className="absolute bottom-4 -left-4 bg-white px-5 py-3 rounded-2xl shadow-xl shadow-zinc-200 border border-zinc-100 flex items-center gap-3 z-20">
-              <div className="flex h-3 w-3 relative">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+          {/* Right — Terminal + Photo */}
+          <div className="hero-image flex-1 flex flex-col items-center gap-8">
+            {/* Profile photo */}
+            <div className="relative float">
+              <div className="w-52 h-52 md:w-64 md:h-64 rounded-3xl overflow-hidden gradient-border shadow-2xl shadow-violet-900/30">
+                <img src={profileImg} alt={PERSONAL_INFO.name} className="w-full h-full object-cover" />
               </div>
-              <span className="text-sm font-bold text-zinc-800 tracking-wide">Available for work</span>
+              {/* Glow behind photo */}
+              <div className="absolute inset-0 rounded-3xl bg-violet-600/20 blur-2xl -z-10 scale-110" />
             </div>
-          </div>
-        </div>
 
+            {/* Terminal window */}
+            <TerminalWindow />
+          </div>
+
+        </div>
       </div>
     </section>
   );
