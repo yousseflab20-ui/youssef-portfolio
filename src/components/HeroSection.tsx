@@ -31,6 +31,16 @@ export default function HeroSection() {
             <a href={SOCIAL_LINKS.github} target="_blank" rel="noopener noreferrer" className="px-8 py-3.5 bg-white text-zinc-900 font-bold rounded-full border border-zinc-200 hover:border-zinc-300 hover:bg-zinc-50 transition-colors flex items-center gap-2">
               <IconGithub /> GitHub
             </a>
+            <a
+              href="/youssef-portfolio/cv-youssef-labnine.pdf"
+              download="Cv-Youssef-Labnine.pdf"
+              className="px-8 py-3.5 bg-zinc-900 text-white font-bold rounded-full border border-zinc-800 hover:bg-blue-600 hover:border-blue-600 transition-all flex items-center gap-2 group shadow-lg shadow-zinc-900/20"
+            >
+              <svg className="w-4 h-4 transition-transform group-hover:translate-y-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 4v12m0 0l-4-4m4 4l4-4M4 20h16" />
+              </svg>
+              Download CV
+            </a>
           </div>
 
           <div className="flex items-center gap-10 mt-16 pt-8 border-t border-zinc-100">
