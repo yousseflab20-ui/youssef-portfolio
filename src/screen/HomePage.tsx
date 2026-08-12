@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
-import { KeyboardControls, useProgress } from "@react-three/drei";
+import { KeyboardControls } from "@react-three/drei";
 import Scene from "../components/Scene";
 import AboutSection from "../components/AboutSection";
 import ProjectsSection from "../components/ProjectsSection";
