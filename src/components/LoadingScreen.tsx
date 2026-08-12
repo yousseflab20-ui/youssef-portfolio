@@ -3,7 +3,7 @@ import { useProgress } from "@react-three/drei";
 
 export default function LoadingScreen() {
   const [dots, setDots] = useState("");
-  const { progress, active, loaded, total } = useProgress();
+  const { progress, loaded } = useProgress();
 
   // Animated dots
   useEffect(() => {
