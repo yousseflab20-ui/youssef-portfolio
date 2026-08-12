@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
+import { useProgress } from "@react-three/drei";
 
 interface IntroOverlayProps {
   onEnter: () => void;
@@ -12,6 +13,9 @@ export default function IntroOverlay({ onEnter, onSkip, introStarted }: IntroOve
   const titleRef  = useRef<HTMLDivElement>(null);
   const btnRef    = useRef<HTMLButtonElement>(null);
   const skipRef   = useRef<HTMLButtonElement>(null);
+
+  const { progress, loaded, total } = useProgress();
+  const isLoaded = progress >= 100 || (loaded > 0 && loaded === total);
 
   // ── Mount animation ──────────────────────────────────────────────────────
   useEffect(() => {
@@ -73,30 +77,36 @@ export default function IntroOverlay({ onEnter, onSkip, introStarted }: IntroOve
         </p>
       </div>
 
-      {/* Enter button */}
       <button
         ref={btnRef}
         onClick={onEnter}
-        disabled={introStarted}
+        disabled={introStarted || !isLoaded}
         style={{ opacity: 0 }}
-        className="group relative overflow-hidden rounded-full transition-all duration-500 disabled:cursor-not-allowed"
+        className="group relative overflow-hidden rounded-full transition-all duration-500 disabled:opacity-50 disabled:cursor-not-allowed"
       >
         <span
-          className="relative z-10 flex items-center gap-3 px-8 py-4"
+          className="relative z-10 flex flex-col items-center gap-1 px-8 py-3"
           style={{
             fontFamily: "'JetBrains Mono', monospace",
-            fontSize: "0.8rem",
-            letterSpacing: "0.18em",
             color: "#fff",
           }}
         >
-          ENTER THE HOUSE
-          <span
-            className="px-2 py-0.5 rounded-md text-xs transition-colors"
-            style={{ background: "rgba(255,255,255,0.12)", fontFamily: "sans-serif" }}
-          >
-            ↵
+          <span className="flex items-center gap-3" style={{ fontSize: "0.8rem", letterSpacing: "0.18em" }}>
+            {isLoaded ? "ENTER THE HOUSE" : "DOWNLOADING..."}
+            {isLoaded && (
+              <span
+                className="px-2 py-0.5 rounded-md text-xs transition-colors"
+                style={{ background: "rgba(255,255,255,0.12)", fontFamily: "sans-serif" }}
+              >
+                ↵
+              </span>
+            )}
           </span>
+          {!isLoaded && (
+            <span className="text-violet-400 font-bold" style={{ fontSize: "0.7rem", letterSpacing: "0.1em" }}>
+              {loaded > 0 ? `${Math.round(progress)}%` : "CONNECTING..."}
+            </span>
+          )}
         </span>
 
         {/* Animated border */}
