@@ -10,7 +10,6 @@ import TechNetwork from "../components/TechNetwork";
 import CVSection from "../components/CVSection";
 import SocialMediaSection from "../components/SocialMediaSection";
 import IntroOverlay from "../components/IntroOverlay";
-import LoadingScreen from "../components/LoadingScreen";
 import type { InteractableConfig } from "../constants/interactables";
 
 // Keyboard mapping for WASD
@@ -22,16 +21,6 @@ const keyboardMap = [
   { name: "jump", keys: ["Space"] },
 ];
 
-/** Reads GLB load progress from inside the Canvas context */
-function SceneLoader({ onLoaded }: { onLoaded: () => void }) {
-  const { progress, loaded, total } = useProgress();
-  useEffect(() => {
-    if (progress >= 100 || (loaded > 0 && loaded === total)) {
-      onLoaded();
-    }
-  }, [progress, loaded, total, onLoaded]);
-  return null;
-}
 
 export default function HomePage() {
   const [interactionTarget, setInteractionTarget] = useState<string | null>(null);
@@ -39,7 +28,6 @@ export default function HomePage() {
   const [isCameraReturning, setIsCameraReturning] = useState(false);
   const [introStarted, setIntroStarted] = useState(false);
   const [introFinished, setIntroFinished] = useState(false);
-  const [sceneLoaded, setSceneLoaded] = useState(false);
 
   // Esc / Close UI
   const closeInteraction = () => {
@@ -65,11 +53,8 @@ export default function HomePage() {
     <KeyboardControls map={keyboardMap}>
       <div className="fixed inset-0 bg-black">
 
-        {/* Full-page cinematic loading screen */}
-        {!sceneLoaded && <LoadingScreen />}
-
-        {/* Intro overlay — visible once scene is loaded and before enter is clicked */}
-        {sceneLoaded && !introFinished && (
+        {/* Intro overlay — visible immediately before enter is clicked */}
+        {!introFinished && (
           <IntroOverlay
             introStarted={introStarted}
             onEnter={() => setIntroStarted(true)}
@@ -79,8 +64,6 @@ export default function HomePage() {
 
         {/* The 3D Engine — always mounted so the GLB loads in background */}
         <Canvas camera={{ fov: 60 }} shadows>
-          {/* Reads drei's useProgress to notify us when GLB is ready */}
-          <SceneLoader onLoaded={() => setSceneLoaded(true)} />
 
           <Scene
             interactionTarget={interactionTarget}
