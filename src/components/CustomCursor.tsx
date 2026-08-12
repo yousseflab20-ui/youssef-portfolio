@@ -39,9 +39,9 @@ export default function CustomCursor() {
       if (dotRef.current) {
         dotRef.current.style.transform = `translate(${mouseX - 4}px, ${mouseY - 4}px)`;
       }
-      // Ring follows with lag (lerp)
-      ringX += (mouseX - ringX) * 0.1;
-      ringY += (mouseY - ringY) * 0.1;
+      // Ring follows almost instantly (very lightweight lag)
+      ringX += (mouseX - ringX) * 0.7; // Increased from 0.35 to 0.7
+      ringY += (mouseY - ringY) * 0.7;
       if (ringRef.current) {
         ringRef.current.style.transform = `translate(${ringX - 16}px, ${ringY - 16}px)`;
       }
@@ -64,7 +64,7 @@ export default function CustomCursor() {
       {/* Dot */}
       <div
         ref={dotRef}
-        className="fixed top-0 left-0 w-2 h-2 rounded-full bg-[var(--accent)] z-[99999] pointer-events-none transition-transform duration-75"
+        className="fixed top-0 left-0 w-2 h-2 rounded-full bg-[var(--accent)] z-[99999] pointer-events-none"
         style={{ willChange: "transform" }}
       />
       {/* Ring */}

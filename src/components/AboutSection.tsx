@@ -1,78 +1,105 @@
-import { PERSONAL_INFO, TECH_STACK } from "../constants";
+import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { PERSONAL_INFO, SOCIAL_LINKS, TECH_STACK } from "../constants";
+import { IconGithub, IconLinkedin, IconMail, IconPin } from "./Icons";
 
-export default function AboutSection() {
+interface AboutSectionProps {
+  isActive: boolean;
+}
+
+export default function AboutSection({ isActive }: AboutSectionProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+    gsap.to(containerRef.current, {
+      opacity: isActive ? 1 : 0.1,
+      y: isActive ? 0 : 50,
+      duration: 1.2,
+      ease: "power3.out"
+    });
+  }, [isActive]);
+
   return (
-    <section id="about" className="relative py-28 overflow-hidden">
-      {/* Background glow */}
-      <div className="absolute top-1/2 left-0 w-96 h-96 bg-violet-600/8 rounded-full blur-[120px] pointer-events-none" />
+    <div 
+      ref={containerRef} 
+      className="w-full max-w-6xl mx-auto h-[85vh] flex flex-col pointer-events-auto"
+    >
+      {/* Ambient lighting for Living Room (Amber/Warm) */}
+      <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[500px] h-[500px] bg-amber-500/10 rounded-full blur-[120px] pointer-events-none" />
 
-      <div className="relative z-10 w-[85%] max-w-7xl mx-auto">
+      {/* Header */}
+      <div className="mb-10 text-center flex-shrink-0">
+        <p className="font-mono text-xs text-amber-400 tracking-widest uppercase mb-2">Living Room</p>
+        <h2 className="text-4xl md:text-5xl font-black text-white tracking-tight">
+          Personal <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-600">Space</span>
+        </h2>
+      </div>
 
-        {/* Section header */}
-        <div className="text-center mb-20 fade-up">
-          <span className="inline-block px-3 py-1 rounded-full glass text-violet-300 text-xs font-bold tracking-widest uppercase mb-4">
-            Get to know me
-          </span>
-          <h2 className="text-4xl md:text-5xl font-black text-white tracking-tight">
-            About <span className="gradient-text">Me</span>
-          </h2>
-          <div className="w-16 h-px bg-gradient-to-r from-transparent via-violet-500 to-transparent mx-auto mt-6" />
-        </div>
+      {/* Main Content - Scrollable within the room */}
+      <div className="flex-1 room-scrollable pr-2 pb-10">
+        <div className="grid lg:grid-cols-5 gap-6 h-full">
 
-        <div className="grid lg:grid-cols-2 gap-16 items-start">
-
-          {/* Left — Bio */}
-          <div className="about-content space-y-6">
-            <div className="glass gradient-border rounded-2xl p-8 space-y-5">
-              <p className="text-slate-300 leading-relaxed text-base">
-                {PERSONAL_INFO.about.intro}
-              </p>
-              <p className="text-slate-400 leading-relaxed text-sm">
-                {PERSONAL_INFO.about.specialization}
-              </p>
-              <p className="text-slate-400 leading-relaxed text-sm">
-                {PERSONAL_INFO.about.goal}
-              </p>
+          {/* Left: Bio Window (Glass Architectural feel) */}
+          <div className="lg:col-span-3 glass-panel rounded-3xl p-8 lg:p-12 relative overflow-hidden group">
+            {/* Window reflection */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+            
+            <h3 className="text-2xl font-bold text-white mb-6">About Me</h3>
+            
+            <div className="space-y-5 text-zinc-300 leading-relaxed text-sm md:text-base">
+              <p>{PERSONAL_INFO.about.intro}</p>
+              <p className="text-zinc-400">{PERSONAL_INFO.about.specialization}</p>
+              <p className="text-zinc-400">{PERSONAL_INFO.about.goal}</p>
             </div>
 
-            <a
-              href="#contact"
-              className="inline-flex items-center gap-3 px-7 py-3.5 bg-violet-600 hover:bg-violet-500 text-white font-bold rounded-xl transition-all duration-300 shadow-lg shadow-violet-600/30 hover:-translate-y-0.5"
-            >
-              Let's Work Together
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </a>
+            <div className="mt-10 pt-8 border-t border-white/5 flex flex-wrap gap-4">
+              <div className="flex items-center gap-3 bg-black/40 px-4 py-2 rounded-xl border border-white/5">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                <span className="text-xs font-mono text-zinc-300">Available for work</span>
+              </div>
+              <div className="flex items-center gap-3 bg-black/40 px-4 py-2 rounded-xl border border-white/5">
+                <IconPin />
+                <span className="text-xs font-mono text-zinc-300">{PERSONAL_INFO.location}</span>
+              </div>
+            </div>
           </div>
 
-          {/* Right — Tech Stack */}
-          <div>
-            <h3 className="text-lg font-bold text-white mb-6 flex items-center gap-2">
-              <span className="w-1.5 h-5 rounded-full bg-violet-500" />
-              Technologies I Work With
-            </h3>
-            <div className="grid grid-cols-4 sm:grid-cols-5 gap-3">
-              {TECH_STACK.map((tech, idx) => (
-                <div
-                  key={idx}
-                  className="tech-card glass glass-hover rounded-xl p-3 flex flex-col items-center gap-2 group"
-                >
-                  <img
-                    src={`https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${tech.icon}`}
-                    alt={tech.name}
-                    className="w-7 h-7 group-hover:scale-110 transition-transform duration-300"
-                  />
-                  <span className="text-[9px] font-bold text-slate-500 uppercase tracking-wider text-center leading-tight">
+          {/* Right: Personal Meta / Bookshelf metaphor */}
+          <div className="lg:col-span-2 space-y-6 flex flex-col">
+            
+            {/* Contact Card */}
+            <div className="glass-panel rounded-3xl p-8 flex-1">
+              <h3 className="text-sm font-mono text-zinc-500 uppercase tracking-widest mb-6">Contact</h3>
+              <a href={`mailto:${PERSONAL_INFO.email}`} className="flex items-center gap-4 text-zinc-300 hover:text-amber-400 transition-colors mb-4">
+                <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center"><IconMail /></div>
+                <span className="text-sm truncate">{PERSONAL_INFO.email}</span>
+              </a>
+              <a href={SOCIAL_LINKS.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 text-zinc-300 hover:text-amber-400 transition-colors mb-4">
+                <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center"><IconGithub /></div>
+                <span className="text-sm">GitHub</span>
+              </a>
+              <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 text-zinc-300 hover:text-amber-400 transition-colors">
+                <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center"><IconLinkedin /></div>
+                <span className="text-sm">LinkedIn</span>
+              </a>
+            </div>
+
+            {/* Quick Tech Preview */}
+            <div className="glass-panel rounded-3xl p-8">
+              <h3 className="text-sm font-mono text-zinc-500 uppercase tracking-widest mb-6">Core Stack</h3>
+              <div className="flex flex-wrap gap-2">
+                {TECH_STACK.slice(0, 8).map(tech => (
+                  <span key={tech.name} className="px-3 py-1.5 bg-amber-500/10 border border-amber-500/20 rounded-lg text-[10px] font-bold text-amber-300 uppercase">
                     {tech.name}
                   </span>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
 
+          </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 }

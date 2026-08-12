@@ -1,122 +1,115 @@
-import { useEffect, useRef, useState } from "react";
-import { gsap } from "gsap";
+import { useState } from "react";
 
-const NAV_LINKS = [
-  { label: "Home", href: "#home" },
-  { label: "About", href: "#about" },
-  { label: "Projects", href: "#projects" },
-  { label: "Contact", href: "#contact" },
+const NAV_LINKS: { label: string; room: string }[] = [
+  { label: "Overview", room: "overview" },
+  { label: "About", room: "living" },
+  { label: "Projects", room: "office" },
+  { label: "Experience", room: "library" },
+  { label: "Tech Stack", room: "workshop" },
 ];
 
-export default function Navbar() {
-  const navRef = useRef<HTMLElement>(null);
-  const [scrolled, setScrolled] = useState(false);
+interface NavbarProps {
+  activeRoom: string;
+  setActiveRoom: (room: string) => void;
+}
+
+export default function Navbar({ activeRoom, setActiveRoom }: NavbarProps) {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [active, setActive] = useState("home");
 
-  useEffect(() => {
-    gsap.fromTo(navRef.current,
-      { y: -100, opacity: 0 },
-      { y: 0, opacity: 1, duration: 1, ease: "power4.out", delay: 0.2 }
-    );
-
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-      // Active section detection
-      const sections = ["home", "about", "projects", "contact"];
-      for (const id of sections.reverse()) {
-        const el = document.getElementById(id);
-        if (el && window.scrollY >= el.offsetTop - 120) {
-          setActive(id);
-          break;
-        }
-      }
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  const navigate = (room: string) => {
+    setActiveRoom(room);
+    setMenuOpen(false);
+  };
 
   return (
-    <nav
-      ref={navRef}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled
-          ? "bg-[#0a0a0f]/80 backdrop-blur-xl border-b border-white/5 py-4"
-          : "bg-transparent py-6"
-      }`}
-    >
-      <div className="w-[85%] max-w-7xl mx-auto flex justify-between items-center">
+    <nav className="fixed top-0 left-0 right-0 z-[100] py-6 px-6 pointer-events-none">
+      <div className="max-w-7xl mx-auto flex justify-between items-start pointer-events-auto">
 
         {/* Logo */}
-        <a href="#home" className="flex items-center gap-3 group">
-          <div className="w-10 h-10 rounded-xl bg-violet-600 flex items-center justify-center font-black text-white text-sm shadow-lg shadow-violet-600/30 group-hover:shadow-violet-500/50 transition-all duration-300">
-            YL
-          </div>
-          <span className="font-extrabold text-lg tracking-tight text-white group-hover:text-violet-300 transition-colors">
-            Youssef<span className="text-violet-400">.</span>
+        <button onClick={() => navigate("overview")} className="flex flex-col group text-left">
+          <span className="font-mono text-[10px] text-zinc-500 uppercase tracking-widest mb-1 group-hover:text-violet-400 transition-colors">
+            System Online
           </span>
-        </a>
+          <span className="font-extrabold text-lg tracking-tight text-white group-hover:text-violet-300 transition-colors flex items-center gap-2">
+            Youssef.dev
+            {activeRoom !== "entrance" && (
+              <span className="text-xs font-mono font-normal text-violet-400 opacity-60">
+                / {activeRoom}
+              </span>
+            )}
+          </span>
+        </button>
 
-        {/* Desktop nav */}
-        <ul className="hidden md:flex items-center gap-1">
-          {NAV_LINKS.map((link) => (
-            <li key={link.href}>
-              <a
-                href={link.href}
-                className={`relative px-4 py-2 text-sm font-semibold rounded-lg transition-all duration-300 ${
-                  active === link.href.slice(1)
-                    ? "text-white"
-                    : "text-slate-400 hover:text-white"
+        {/* Desktop Nav */}
+        <div className="hidden md:flex flex-col items-end gap-3">
+          <div className="glass-panel rounded-2xl p-2 flex items-center gap-1 backdrop-blur-3xl bg-black/40">
+            {NAV_LINKS.map((link) => (
+              <button
+                key={link.room}
+                onClick={() => navigate(link.room)}
+                className={`px-4 py-2 text-xs font-mono font-semibold rounded-xl transition-all duration-300 ${
+                  activeRoom === link.room
+                    ? "bg-violet-600/20 text-violet-300 border border-violet-500/30 shadow-[0_0_15px_rgba(139,92,246,0.15)]"
+                    : "text-zinc-400 hover:text-white hover:bg-white/5 border border-transparent"
                 }`}
               >
-                {active === link.href.slice(1) && (
-                  <span className="absolute inset-0 rounded-lg bg-white/5 border border-white/10" />
-                )}
-                <span className="relative">{link.label}</span>
-              </a>
-            </li>
-          ))}
-          <li className="ml-4">
-            <a
-              href="#contact"
-              className="px-5 py-2.5 bg-violet-600 hover:bg-violet-500 text-white text-sm font-bold rounded-xl transition-all duration-300 shadow-lg shadow-violet-600/20 hover:shadow-violet-500/30 hover:-translate-y-0.5"
+                {link.label}
+              </button>
+            ))}
+            <div className="w-px h-6 bg-white/10 mx-2" />
+            <button
+              onClick={() => navigate("mailbox")}
+              className={`px-5 py-2 text-xs font-bold rounded-xl transition-all duration-300 ${
+                activeRoom === "mailbox"
+                  ? "bg-rose-500 text-white shadow-[0_0_20px_rgba(244,63,94,0.3)]"
+                  : "bg-white text-black hover:bg-zinc-200"
+              }`}
             >
-              Let's Talk
-            </a>
-          </li>
-        </ul>
+              Contact
+            </button>
+          </div>
+          <a
+            href="/youssef-portfolio/cv-youssef-labnine.pdf"
+            download="Cv-Youssef-Labnine.pdf"
+            className="text-[10px] font-mono text-zinc-500 hover:text-violet-400 transition-colors flex items-center gap-1"
+          >
+            ↓ Download CV
+          </a>
+        </div>
 
-        {/* Mobile hamburger */}
+        {/* Mobile Hamburger */}
         <button
-          className="md:hidden flex flex-col gap-1.5 p-2"
+          className="md:hidden glass-panel w-12 h-12 rounded-xl flex flex-col items-center justify-center gap-1.5"
           onClick={() => setMenuOpen(!menuOpen)}
         >
-          <span className={`w-6 h-0.5 bg-white transition-all duration-300 ${menuOpen ? "rotate-45 translate-y-2" : ""}`} />
-          <span className={`w-6 h-0.5 bg-white transition-all duration-300 ${menuOpen ? "opacity-0" : ""}`} />
-          <span className={`w-6 h-0.5 bg-white transition-all duration-300 ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`} />
+          <span className={`w-5 h-px bg-white transition-all ${menuOpen ? "rotate-45 translate-y-2" : ""}`} />
+          <span className={`w-5 h-px bg-white transition-all ${menuOpen ? "opacity-0" : ""}`} />
+          <span className={`w-5 h-px bg-white transition-all ${menuOpen ? "-rotate-45 -translate-y-[7px]" : ""}`} />
         </button>
       </div>
 
-      {/* Mobile menu */}
-      <div className={`md:hidden absolute top-full left-0 right-0 bg-[#0a0a0f]/95 backdrop-blur-xl border-b border-white/5 transition-all duration-300 overflow-hidden ${menuOpen ? "max-h-72 py-6" : "max-h-0 py-0"}`}>
-        <div className="w-[85%] mx-auto flex flex-col gap-3">
-          {NAV_LINKS.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              onClick={() => setMenuOpen(false)}
-              className="text-slate-300 hover:text-white font-semibold py-2 border-b border-white/5 transition-colors"
+      {/* Mobile Menu */}
+      <div className={`md:hidden absolute top-24 left-6 right-6 glass-panel backdrop-blur-3xl bg-black/80 border-white/10 rounded-2xl overflow-hidden transition-all duration-300 pointer-events-auto ${
+        menuOpen ? "max-h-[400px] opacity-100 border" : "max-h-0 opacity-0 border-0"
+      }`}>
+        <div className="p-4 flex flex-col gap-1">
+          {NAV_LINKS.map(link => (
+            <button
+              key={link.room}
+              onClick={() => navigate(link.room)}
+              className={`text-left px-4 py-3 text-sm font-mono rounded-xl transition-colors ${
+                activeRoom === link.room ? "bg-violet-600/20 text-violet-300" : "text-zinc-300 hover:bg-white/5"
+              }`}
             >
               {link.label}
-            </a>
+            </button>
           ))}
-          <a
-            href="#contact"
-            onClick={() => setMenuOpen(false)}
-            className="mt-2 text-center py-3 bg-violet-600 text-white rounded-xl font-bold"
+          <button
+            onClick={() => navigate("mailbox")}
+            className="mt-2 text-center py-3 bg-white text-black rounded-xl font-bold text-sm"
           >
-            Let's Talk
-          </a>
+            Contact
+          </button>
         </div>
       </div>
     </nav>

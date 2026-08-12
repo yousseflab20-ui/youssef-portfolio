@@ -1,78 +1,176 @@
-
 export const PERSONAL_INFO = {
-    name: "YOUSSEF LABNINE",
-    title: "Mobile & Web Developer",
-    email: "yousseflab20@gmail.com",
-    phone: "+212 718-799401",
-    location: "Agadir, Morocco",
-    bio: "Based in Morocco, I build scalable web applications and high-performance mobile apps using modern technologies, focusing on clean architecture, performance, and user-centered design. I’m passionate about solving real-world problems and transforming ideas into reliable digital products. Let’s build something great together.",
-    about: {
-        intro: "I'm a Mobile & Web Developer focused on building scalable, high-performance applications. I combine clean architecture with modern UI/UX principles to deliver reliable and efficient digital products.",
-        specialization: "I specialize in designing robust backend systems and intuitive frontend/mobile experiences using modern JavaScript technologies. My goal is not just to write code — but to solve real business problems.",
-        goal: "I am continuously improving my skills, exploring new technologies, and building production-ready solutions that scale."
-    }
+  name: "Youssef Labnine",
+  title: "Full Stack Developer",
+  email: "yousseflab20@gmail.com",
+  phone: "+212 718-799401",
+  location: "Agadir, Morocco",
+  bio: "Based in Morocco, I build scalable web applications and high-performance mobile apps using modern technologies, focusing on clean architecture, performance, and user-centered design.",
+  about: {
+    intro: "Full Stack Developer focused on building scalable, high-performance web and mobile applications. I combine clean architecture with modern UI/UX principles to deliver reliable and efficient digital products.",
+    specialization: "I specialize in designing robust backend systems and intuitive frontend/mobile experiences using modern JavaScript technologies. My goal is not just to write code — but to solve real business problems.",
+    goal: "I am continuously improving my skills, exploring new technologies, and building production-ready solutions that scale.",
+  },
 };
 
 export const STATS = {
-    yearsExperience: "1+",
-    projectsCompleted: "50+",
-    technologies: "15+"
+  yearsExperience: "1+",
+  projectsCompleted: "4+",
+  technologies: "15+",
 };
 
 export const SOCIAL_LINKS = {
-    github: "https://github.com/yousseflab20-ui",
-    linkedin: "https://www.linkedin.com/in/youssef-labnine-313a47367/",
+  github: "https://github.com/yousseflab20-ui",
+  linkedin: "https://www.linkedin.com/in/youssef-labnine-313a47367/",
 };
 
 export const TECH_STACK = [
-    { name: "React.js", icon: "react/react-original.svg" },
-    { name: "React Native", icon: "react/react-original.svg" },
-    { name: "Expo", icon: "expo/expo-original.svg" },
-    { name: "Node.js", icon: "nodejs/nodejs-original.svg" },
-    { name: "Express.js", icon: "express/express-original.svg" },
-    { name: "JavaScript", icon: "javascript/javascript-original.svg" },
-    { name: "TypeScript", icon: "typescript/typescript-original.svg" },
-    { name: "Postgres", icon: "postgresql/postgresql-original.svg" },
-    { name: "SQL", icon: "azuresqldatabase/azuresqldatabase-original.svg" },
-    { name: "Docker", icon: "docker/docker-original.svg" },
-    { name: "Jest", icon: "jest/jest-plain.svg" },
-    { name: "HTML", icon: "html5/html5-original.svg" },
-    { name: "CSS", icon: "css3/css3-original.svg" },
-    { name: "Figma", icon: "figma/figma-original.svg" },
-    { name: "Jira", icon: "jira/jira-original.svg" },
+  { name: "React Native", icon: "react/react-original.svg", category: "mobile", description: "Cross-platform mobile apps" },
+  { name: "Expo", icon: "expo/expo-original.svg", category: "mobile", description: "React Native toolchain" },
+  { name: "React.js", icon: "react/react-original.svg", category: "frontend", description: "Component-based UI" },
+  { name: "Next.js", icon: "nextjs/nextjs-original.svg", category: "frontend", description: "Full-stack React framework" },
+  { name: "TypeScript", icon: "typescript/typescript-original.svg", category: "language", description: "Typed JavaScript" },
+  { name: "JavaScript", icon: "javascript/javascript-original.svg", category: "language", description: "Core web language" },
+  { name: "Node.js", icon: "nodejs/nodejs-original.svg", category: "backend", description: "Server-side JS runtime" },
+  { name: "Express.js", icon: "express/express-original.svg", category: "backend", description: "Minimal web framework" },
+  { name: "PostgreSQL", icon: "postgresql/postgresql-original.svg", category: "database", description: "Relational database" },
+  { name: "Sequelize", icon: "sequelize/sequelize-original.svg", category: "database", description: "ORM for Node.js" },
+  { name: "Docker", icon: "docker/docker-original.svg", category: "devops", description: "Containerization" },
+  { name: "Git", icon: "git/git-original.svg", category: "devops", description: "Version control" },
+  { name: "Jest", icon: "jest/jest-plain.svg", category: "testing", description: "JavaScript testing" },
+  { name: "Figma", icon: "figma/figma-original.svg", category: "design", description: "UI/UX design" },
+  { name: "Jira", icon: "jira/jira-original.svg", category: "tools", description: "Agile project management" },
 ];
 
 export const PROJECTS = [
-    {
-        title: "CarMarket Mobile App",
-        description: "A full-stack car marketplace mobile application built with Expo & TypeScript. The app allows users to list, browse, and chat in real-time about vehicles. I developed both frontend and backend including authentication, image uploads, push notifications, and CI/CD workflows.",
-        tech: ["Expo", "TypeScript", "Node.js", "Sequelize ORM", "Zod", "Zustand", "Firebase", "Socket.io", "Cloudinary", "GitHub Actions"],
-        image: "https://images.unsplash.com/photo-1555421689-d68471e189f2?w=500",
-        link: "#",
-        github: "https://github.com/yousseflab20-ui/CarMarket"
-    },
-    {
-        title: "La Grande Soirée Gnawa",
-        description: "A full-stack event management mobile application developed for La Grande Soirée Gnawa. I built both backend and frontend including authentication, event management, user registration, and secure data handling. The project focuses on performance, scalability, and clean architecture.",
-        tech: ["React Native CLI", "TypeScript", "Node.js", "JavaScript", "ORM", "Zustand", "AsyncStorage"],
-        image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=500",
-        link: "#",
-        github: "https://github.com/yousseflab20-ui/La-Grande-Soiree-Gnawa"
-    },
-    {
-        title: "Agadir Task Manager 2025",
-        description: "A full-stack task management mobile application developed for Agadir Task Manager 2025. I built both frontend and backend including authentication, task creation, real-time updates, and secure data handling.",
-        tech: ["React Native CLI", "TypeScript", "Node.js", "JavaScript", "Sequelize ORM", "Zustand", "AsyncStorage"],
-        image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=500",
-        link: "#",
-        github: "https://github.com/yousseflab20-ui/Agadir-Task-Manager-2025"
-    },
-    {
-        title: "Simulateur de Taxi Casablancais",
-        description: "A taxi booking simulation mobile application built with Expo. The app calculates the distance between the user and the taxi, displays real-time taxi location tracking on the map, and provides estimated arrival updates.",
-        tech: ["React Native", "Expo", "Maps Integration", "Geolocation", "Distance Calculation"],
-        image: "https://images.unsplash.com/photo-1553877522-43269d4ea984?w=500",
-        link: "#",
-        github: "https://github.com/yousseflab20-ui/Simulateur-de-Taxi-Casablancais"
-    }
+  {
+    id: "PROJECT_001",
+    title: "CarMarket",
+    subtitle: "Mobile Car Marketplace",
+    status: "Production",
+    type: "Mobile Marketplace",
+    role: "Full Stack Developer",
+    problem: "No dedicated mobile platform existed for buying and selling vehicles in Morocco with real-time communication between buyers and sellers.",
+    solution: "Built a full-stack mobile marketplace with real-time messaging, push notifications, audio/video calls, and a web admin portal — deployed on Google Play Store.",
+    architecture: ["React Native CLI", "Node.js REST API", "PostgreSQL + Sequelize", "Socket.io (Real-time)", "Cloudinary (Media)", "Firebase (Notifications)"],
+    features: [
+      "Secure JWT authentication",
+      "Vehicle listing & browsing",
+      "Real-time messaging (Socket.io)",
+      "Push notifications & audio/video calls",
+      "Favorites & geolocation",
+      "Admin portal for moderation",
+      "CI/CD with GitHub Actions",
+      "Google Play Store deployment",
+    ],
+    tech: ["React Native CLI", "TypeScript", "Node.js", "Express.js", "PostgreSQL", "Sequelize", "Zustand", "Firebase", "Socket.io", "Cloudinary", "GitHub Actions"],
+    image: "https://images.unsplash.com/photo-1555421689-d68471e189f2?w=800",
+    link: "#",
+    github: "https://github.com/yousseflab20-ui/CarMarket",
+  },
+  {
+    id: "PROJECT_002",
+    title: "La Grande Soirée Gnawa",
+    subtitle: "Event Booking Mobile App",
+    status: "Completed",
+    type: "Event Management",
+    role: "Full Stack Developer",
+    problem: "Event organizers lacked a dedicated mobile platform for managing artist catalogues and ticket reservations for cultural events.",
+    solution: "Developed a full-stack mobile application with a secured REST API, dynamic artist catalogue, and a complete ticket reservation system.",
+    architecture: ["React Native CLI", "Node.js REST API", "PostgreSQL + Sequelize", "JWT Authentication"],
+    features: [
+      "JWT authentication",
+      "Dynamic artist catalogue",
+      "Ticket reservation system",
+      "User profile management",
+      "Secure data handling",
+    ],
+    tech: ["React Native CLI", "TypeScript", "Node.js", "Express.js", "Sequelize", "PostgreSQL", "Zustand", "AsyncStorage"],
+    image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800",
+    link: "#",
+    github: "https://github.com/yousseflab20-ui/La-Grande-Soiree-Gnawa",
+  },
+  {
+    id: "PROJECT_003",
+    title: "Agadir Task Manager",
+    subtitle: "Full Stack Task Management App",
+    status: "Completed",
+    type: "Productivity",
+    role: "Full Stack Developer",
+    problem: "Teams needed a mobile-first task management solution with real-time updates and secure authentication.",
+    solution: "Built a full-stack task management app with authentication, real-time task updates, and a clean mobile UI using React Native and Node.js.",
+    architecture: ["React Native CLI", "Node.js REST API", "PostgreSQL + Sequelize ORM"],
+    features: [
+      "JWT authentication",
+      "Task creation & management",
+      "Real-time updates",
+      "User roles & permissions",
+      "Secure data handling",
+    ],
+    tech: ["React Native CLI", "TypeScript", "Node.js", "JavaScript", "Sequelize ORM", "Zustand", "AsyncStorage"],
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800",
+    link: "#",
+    github: "https://github.com/yousseflab20-ui/Agadir-Task-Manager-2025",
+  },
+  {
+    id: "PROJECT_004",
+    title: "Taxi Casablancais Simulator",
+    subtitle: "Real-time Taxi Booking App",
+    status: "Completed",
+    type: "Transportation",
+    role: "Mobile Developer",
+    problem: "Needed a simulation of a taxi booking experience with real-time geolocation, fare estimation, and map navigation.",
+    solution: "Built a mobile taxi booking simulator with real-time geolocation, interactive maps, distance calculation and fare estimation.",
+    architecture: ["React Native + Expo", "Maps API (Geolocation)", "Zustand (State)"],
+    features: [
+      "Real-time geolocation",
+      "Interactive map interface",
+      "Distance calculation",
+      "Fare estimation",
+      "Booking simulation",
+    ],
+    tech: ["React Native", "Expo", "TypeScript", "Maps Integration", "Geolocation", "Zustand"],
+    image: "https://images.unsplash.com/photo-1553877522-43269d4ea984?w=800",
+    link: "#",
+    github: "https://github.com/yousseflab20-ui/Simulateur-de-Taxi-Casablancais",
+  },
+];
+
+export const EXPERIENCE = [
+  {
+    id: "exp_001",
+    company: "Brandiha",
+    role: "Full Stack Developer Intern",
+    type: "Internship · On-site",
+    period: "Mar 2026 – Jun 2026",
+    hash: "a3f2b1c",
+    description: "Developed web applications with Next.js and mobile apps with React Native. Built and integrated REST APIs with Node.js, fixed bugs and implemented new features. Collaborated with the team via Git and GitHub, participating in code reviews.",
+    tech: ["Next.js", "React Native", "Node.js", "REST API", "Git", "GitHub"],
+  },
+];
+
+export const EDUCATION = [
+  {
+    id: "edu_001",
+    title: "Mobile Development Training",
+    subtitle: "JavaScript · TypeScript · React Native",
+    institution: "Simplon Maghreb",
+    period: "Sep 2025",
+    hash: "c7d4e2f",
+  },
+  {
+    id: "edu_002",
+    title: "Front-End Development",
+    subtitle: "HTML · CSS · Tailwind CSS · JavaScript",
+    institution: "Self-taught",
+    period: "2024 – 2025",
+    hash: "b2e9a1d",
+  },
+  {
+    id: "edu_003",
+    title: "Electrical Installation Diploma",
+    subtitle: "Electrical Engineering",
+    institution: "ISTA Agadir",
+    period: "2023 – 2025",
+    hash: "d5f3c8a",
+  },
 ];
