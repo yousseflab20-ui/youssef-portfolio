@@ -10,6 +10,9 @@ import type { InteractableConfig } from "../constants/interactables";
 
 const modelUrl = import.meta.env.BASE_URL + "models/modern-apartment.glb";
 
+// Configure Draco decoder (required for Draco-compressed GLB files)
+useGLTF.setDecoderPath("https://www.gstatic.com/draco/versioned/decoders/1.5.6/");
+
 // Preload the model
 useGLTF.preload(modelUrl);
 
