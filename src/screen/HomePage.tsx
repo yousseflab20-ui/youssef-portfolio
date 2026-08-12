@@ -24,10 +24,12 @@ const keyboardMap = [
 
 /** Reads GLB load progress from inside the Canvas context */
 function SceneLoader({ onLoaded }: { onLoaded: () => void }) {
-  const { progress } = useProgress();
+  const { progress, loaded, total } = useProgress();
   useEffect(() => {
-    if (progress === 100) onLoaded();
-  }, [progress, onLoaded]);
+    if (progress >= 100 || (loaded > 0 && loaded === total)) {
+      onLoaded();
+    }
+  }, [progress, loaded, total, onLoaded]);
   return null;
 }
 

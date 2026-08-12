@@ -1,28 +1,15 @@
 import { useEffect, useState } from "react";
+import { useProgress } from "@react-three/drei";
 
 export default function LoadingScreen() {
   const [dots, setDots] = useState("");
-  const [progress, setProgress] = useState(0);
+  const { progress, active, loaded, total } = useProgress();
 
   // Animated dots
   useEffect(() => {
     const id = setInterval(() => {
       setDots(d => (d.length >= 3 ? "" : d + "."));
     }, 450);
-    return () => clearInterval(id);
-  }, []);
-
-  // Fake-progress bar that fills up to 90% quickly, pauses, then we fade it out externally
-  useEffect(() => {
-    let current = 0;
-    const id = setInterval(() => {
-      current += Math.random() * 12;
-      if (current >= 90) {
-        current = 90;
-        clearInterval(id);
-      }
-      setProgress(current);
-    }, 250);
     return () => clearInterval(id);
   }, []);
 
@@ -33,8 +20,11 @@ export default function LoadingScreen() {
         <h1 className="text-4xl md:text-6xl font-black text-white tracking-tight">
           Youssef<span className="text-violet-500">.dev</span>
         </h1>
-        <p className="text-gray-500 font-mono text-sm tracking-widest uppercase">
-          Loading environment{dots}
+        <p className="text-gray-500 font-mono text-sm tracking-widest uppercase mt-4">
+          Loading Environment{dots}
+        </p>
+        <p className="text-violet-400 font-mono text-xs tracking-widest mt-1">
+          {loaded > 0 ? `${Math.round(progress)}%` : "Connecting..."}
         </p>
       </div>
 
