@@ -30,14 +30,14 @@ export default function SocialMediaSection({ isActive }: { isActive: boolean }) 
     <div className="flex flex-col items-center justify-center">
       <h2 className="text-3xl font-bold text-white mb-10 tracking-widest uppercase">Connect With Me</h2>
       
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+      <div className="flex flex-wrap justify-center gap-6">
         {links.map((link) => (
           <a
             key={link.name}
             href={link.url}
             target="_blank"
             rel="noreferrer"
-            className={`social-card flex flex-col items-center justify-center p-8 bg-black/40 backdrop-blur-xl border border-white/10 rounded-2xl transition-all duration-300 ${link.color} group`}
+            className={`social-card flex flex-col items-center justify-center p-8 bg-black/40 backdrop-blur-xl border border-white/10 rounded-2xl transition-all duration-300 ${link.color} group min-w-[160px]`}
           >
             {link.icon}
             <span className="text-white font-medium">{link.name}</span>
