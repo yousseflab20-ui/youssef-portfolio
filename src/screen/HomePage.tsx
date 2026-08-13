@@ -99,7 +99,11 @@ export default function HomePage() {
 
         {/* Portfolio UI sections */}
         {interactionTarget && (
-          <div className="absolute inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 md:p-12 animate-in fade-in duration-300 pointer-events-auto">
+          <div 
+            onPointerDown={(e) => e.stopPropagation()}
+            onClick={(e) => e.stopPropagation()}
+            className="absolute inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 md:p-12 animate-in fade-in duration-300 pointer-events-auto"
+          >
             <button
               onClick={closeInteraction}
               className="absolute top-8 right-8 text-white/50 hover:text-white flex items-center gap-2 font-mono"
