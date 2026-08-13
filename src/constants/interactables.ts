@@ -9,6 +9,8 @@ export interface InteractableConfig {
    * Prefer resolving from the real GLB node whenever possible.
    */
   position?: [number, number, number];
+  /** Optional offset for the floating HTML marker. Defaults to [0, 0.6, 0] */
+  markerOffset?: [number, number, number];
   interactionDistance: number;
 }
 
@@ -30,7 +32,8 @@ export const INTERACTABLES: Record<string, InteractableConfig> = {
   projects: {
     id: "projects",
     nodeName: "iMac",
-    position:  [5.24, 2.09, -1.36],
+    position: [5.06, 1.54, -0.39],
+    markerOffset: [0, 0.1, 0], // Lowered offset so it doesn't float too high
     label: "Projects",
     interactionDistance: 3,
   },

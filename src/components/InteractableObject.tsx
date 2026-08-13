@@ -1,5 +1,6 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
+import { Html } from "@react-three/drei";
 import * as THREE from "three";
 import type { InteractableConfig } from "../constants/interactables";
 
@@ -26,11 +27,13 @@ export default function InteractableObject({
   const targetPos = useRef(new THREE.Vector3());
   const hitboxSize = useRef(new THREE.Vector3(1, 1, 1));
   const isHoveredRef = useRef(false);
-  const isReady = useRef(false); // true once we have a valid position
+  const [isReady, setIsReady] = useState(false); // Changed to state to trigger render for Html
+  const isReadyRef = useRef(false); // Keep ref for useFrame sync
 
   // ── One-time setup: resolve position from GLB node or fallback ─────────────
   useEffect(() => {
-    isReady.current = false;
+    isReadyRef.current = false;
+    setIsReady(false);
 
     // ── PRIORITY 1: find the named node in the scene ──────────────────────────
     if (config.nodeName) {
@@ -57,7 +60,8 @@ export default function InteractableObject({
           hitboxSize.current.set(0.8, 0.8, 0.8);
         }
 
-        isReady.current = true;
+        isReadyRef.current = true;
+        setIsReady(true);
         console.info(
           `[InteractableObject] ✅ "${config.id}" attached to node "${config.nodeName}" ` +
           `@ [${targetPos.current.x.toFixed(2)}, ${targetPos.current.y.toFixed(2)}, ${targetPos.current.z.toFixed(2)}]`
@@ -72,24 +76,25 @@ export default function InteractableObject({
     }
 
     // ── PRIORITY 2: hardcoded position fallback ───────────────────────────────
-    if (!isReady.current && config.position) {
+    if (!isReadyRef.current && config.position) {
       targetPos.current.set(...config.position);
       hitboxSize.current.set(0.8, 0.8, 0.8);
-      isReady.current = true;
+      isReadyRef.current = true;
+      setIsReady(true);
       console.warn(
         `[InteractableObject] ⚠️ "${config.id}" using hardcoded fallback position ` +
         `[${config.position.join(", ")}]. Node "${config.nodeName}" was not found.`
       );
     }
 
-    if (!isReady.current) {
+    if (!isReadyRef.current) {
       console.error(
         `[InteractableObject] 🚫 "${config.id}" has neither a valid node nor a fallback position. It will be invisible.`
       );
     }
 
     // Sync the invisible hitbox mesh
-    if (meshRef.current && isReady.current) {
+    if (meshRef.current && isReadyRef.current) {
       meshRef.current.position.copy(targetPos.current);
       meshRef.current.scale.copy(hitboxSize.current).multiplyScalar(2); // full size = 2 × half
     }
@@ -97,7 +102,7 @@ export default function InteractableObject({
 
   // ── Per-frame: distance gate + screen-centre raycast ──────────────────────
   useFrame(() => {
-    if (!meshRef.current || !isReady.current) return;
+    if (!meshRef.current || !isReadyRef.current) return;
 
     // If another item is open, clear this one and exit
     if (activeTargetId && activeTargetId !== config.id) {
@@ -135,6 +140,32 @@ export default function InteractableObject({
     <mesh ref={meshRef}>
       <boxGeometry args={[1, 1, 1]} />
       <meshBasicMaterial transparent opacity={0} depthWrite={false} />
+
+      {/* Floating Marker (Visible from afar) */}
+      {isReady && !activeTargetId && (
+        <Html 
+          position={config.markerOffset || [0, 0.6, 0]} 
+          center 
+          distanceFactor={8}
+          zIndexRange={[100, 0]} // Ensure they render behind UI if needed
+        >
+          <div className="flex flex-col items-center justify-center pointer-events-none group">
+            {/* Label box */}
+            <div className="px-3 py-1.5 bg-black/60 backdrop-blur-md text-white/90 text-sm font-medium rounded-lg border border-white/10 shadow-lg whitespace-nowrap opacity-80 group-hover:opacity-100 transition-opacity">
+              {config.label}
+            </div>
+            
+            {/* Connecting line */}
+            <div className="w-px h-6 bg-gradient-to-b from-white/40 to-transparent mt-1" />
+            
+            {/* Glowing dot */}
+            <div className="relative mt-1">
+              <div className="absolute inset-0 rounded-full bg-white/40 blur-[4px] animate-pulse" />
+              <div className="w-2 h-2 rounded-full bg-white shadow-[0_0_10px_rgba(255,255,255,0.8)] relative z-10" />
+            </div>
+          </div>
+        </Html>
+      )}
     </mesh>
   );
 }
