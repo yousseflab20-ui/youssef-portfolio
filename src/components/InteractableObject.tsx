@@ -29,9 +29,12 @@ export default function InteractableObject({
 
   // ── One-time setup: find the object position and compute a capped hitbox ──
   useEffect(() => {
+    let foundByName = false;
+
     if (config.nodeName) {
       const node = scene.getObjectByName(config.nodeName);
       if (node) {
+        foundByName = true;
         const box = new THREE.Box3().setFromObject(node);
         if (!box.isEmpty()) {
           box.getCenter(targetPos.current); // Use geometric center, not node origin
@@ -48,10 +51,16 @@ export default function InteractableObject({
         } else {
           node.getWorldPosition(targetPos.current);
         }
+      } else {
+        // Node name not found – likely renamed by gltf-transform join/flatten
+        console.warn(`[InteractableObject] Node "${config.nodeName}" not found in scene for "${config.id}". Falling back to hardcoded position.`);
       }
-    } else if (config.position) {
+    }
+
+    // Use hardcoded position if: no nodeName, or nodeName lookup failed
+    if (!foundByName && config.position) {
       targetPos.current.set(...config.position);
-      hitboxSize.current.set(0.6, 0.6, 0.6);
+      hitboxSize.current.set(0.8, 0.8, 0.8);
     }
 
     // Position and scale the visible hitbox mesh
