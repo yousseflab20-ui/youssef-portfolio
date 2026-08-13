@@ -10,81 +10,108 @@ interface CameraControllerProps {
   setIsCameraReturning: (val: boolean) => void;
 }
 
-export default function CameraController({ interactionTarget, isCameraReturning, setIsCameraReturning }: CameraControllerProps) {
+export default function CameraController({
+  interactionTarget,
+  isCameraReturning,
+  setIsCameraReturning,
+}: CameraControllerProps) {
   const { camera, scene } = useThree();
-  const initialCameraPos = useRef(new THREE.Vector3());
-  const initialCameraQuat = useRef(new THREE.Quaternion());
-  const targetPos = useRef(new THREE.Vector3());
+  const savedPos = useRef(new THREE.Vector3());
+  const savedQuat = useRef(new THREE.Quaternion());
 
   useEffect(() => {
+    // ── OPEN: move camera toward the interacted object ─────────────────────
     if (interactionTarget) {
-      // Save the current player camera position and rotation before moving
-      initialCameraPos.current.copy(camera.position);
-      initialCameraQuat.current.copy(camera.quaternion);
+      // Save player camera state before moving
+      savedPos.current.copy(camera.position);
+      savedQuat.current.copy(camera.quaternion);
 
       const config = INTERACTABLES[interactionTarget];
       if (!config) return;
 
-      // Find where we should look at
+      // Resolve the target world position from the real GLB node
+      const focusPoint = new THREE.Vector3();
+      let resolved = false;
+
       if (config.nodeName) {
         const node = scene.getObjectByName(config.nodeName);
         if (node) {
-          node.getWorldPosition(targetPos.current);
+          const box = new THREE.Box3().setFromObject(node);
+          if (!box.isEmpty()) {
+            box.getCenter(focusPoint);
+          } else {
+            node.getWorldPosition(focusPoint);
+          }
+          resolved = true;
         }
-      } else if (config.position) {
-        targetPos.current.set(...config.position);
       }
 
-      // Calculate a spot slightly in front of and above the object to view it
-      // This is a simple offset. For a robust system, you might want to calculate the direction from the player to the object.
-      const offsetPos = targetPos.current.clone();
-      
-      // We'll calculate a vector from the object to the player, normalize it, and step back a bit
-      const dirToPlayer = new THREE.Vector3().subVectors(camera.position, targetPos.current).normalize();
-      
-      // Distance to stay away from the object
-      const viewDistance = 1.5; 
-      offsetPos.add(dirToPlayer.multiplyScalar(viewDistance));
-      offsetPos.y = targetPos.current.y + 0.5; // Look slightly down at it
+      // Fallback to hardcoded position if node not found
+      if (!resolved && config.position) {
+        focusPoint.set(...config.position);
+        resolved = true;
+      }
 
-      // Smoothly move the camera
+      if (!resolved) return;
+
+      // Calculate camera orbit position:
+      // Step back from the object in the direction the player came from, at eye height
+      const dirFromObject = new THREE.Vector3()
+        .subVectors(camera.position, focusPoint)
+        .normalize();
+
+      const VIEW_DISTANCE = 1.8;
+      const orbitPos = focusPoint
+        .clone()
+        .add(dirFromObject.multiplyScalar(VIEW_DISTANCE));
+
+      // Keep camera roughly at eye height relative to the object
+      orbitPos.y = focusPoint.y + 0.4;
+
+      // Smoothly fly the camera to the orbit position while looking at the object
+      gsap.killTweensOf(camera.position);
       gsap.to(camera.position, {
-        x: offsetPos.x,
-        y: offsetPos.y,
-        z: offsetPos.z,
-        duration: 1,
+        x: orbitPos.x,
+        y: orbitPos.y,
+        z: orbitPos.z,
+        duration: 1.0,
         ease: "power2.inOut",
         onUpdate: () => {
-          // Keep looking at the target while moving
-          camera.lookAt(targetPos.current);
-        }
+          camera.lookAt(focusPoint);
+        },
       });
-      
-    } else if (isCameraReturning) {
-      // We need to return to the player's saved position and rotation
-      
-      // We will interpolate quaternion for smooth rotation
-      const dummyObj = { t: 0 };
+
+      return;
+    }
+
+    // ── CLOSE: smoothly return to saved player position / rotation ─────────
+    if (isCameraReturning) {
       const startQuat = camera.quaternion.clone();
+      const dummy = { t: 0 };
 
+      gsap.killTweensOf(camera.position);
       gsap.to(camera.position, {
-        x: initialCameraPos.current.x,
-        y: initialCameraPos.current.y,
-        z: initialCameraPos.current.z,
-        duration: 1,
+        x: savedPos.current.x,
+        y: savedPos.current.y,
+        z: savedPos.current.z,
+        duration: 1.0,
         ease: "power2.inOut",
       });
 
-      gsap.to(dummyObj, {
+      gsap.to(dummy, {
         t: 1,
-        duration: 1,
+        duration: 1.0,
         ease: "power2.inOut",
         onUpdate: () => {
-          camera.quaternion.slerpQuaternions(startQuat, initialCameraQuat.current, dummyObj.t);
+          camera.quaternion.slerpQuaternions(
+            startQuat,
+            savedQuat.current,
+            dummy.t
+          );
         },
         onComplete: () => {
-          setIsCameraReturning(false); // Done returning! Player can move again.
-        }
+          setIsCameraReturning(false);
+        },
       });
     }
   }, [interactionTarget, isCameraReturning, camera, scene, setIsCameraReturning]);

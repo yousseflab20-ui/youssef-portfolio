@@ -5,6 +5,7 @@ import Player from "./Player";
 import InteractableObject from "./InteractableObject";
 import CameraController from "./CameraController";
 import IntroCameraController from "./IntroCameraController";
+import SceneDebugger from "./SceneDebugger";
 import { INTERACTABLES } from "../constants/interactables";
 import type { InteractableConfig } from "../constants/interactables";
 
@@ -43,6 +44,9 @@ export default function Scene({
 }: SceneProps) {
   return (
     <Suspense fallback={null}>
+      {/* DEV: log all GLB node names & positions to browser console */}
+      {import.meta.env.DEV && <SceneDebugger />}
+
       <Sky sunPosition={[100, 20, 100]} turbidity={0.1} rayleigh={0.5} />
       <ambientLight intensity={0.5} />
       <directionalLight castShadow position={[10, 10, 10]} intensity={1} />
